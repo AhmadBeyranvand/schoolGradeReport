@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/static/css/font.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         html,
         body {
@@ -17,36 +19,68 @@
         }
 
         section {
-            margin:auto;
-        }
-
-        img {
-            height: 30svh;
-            opacity: 0;
-        }
-
-        img:first-child {
-            margin-bottom: 30svh;
-        }
-
-        img:last-child {
-            margin-top: 30svh;
-        }
-
-        h2 {
-            display: block;
-            color: white;
-            font-family: sans-serif;
-            font-size: 24svh;
-            margin: 8svw 0;
+            margin: auto;
         }
     </style>
 </head>
 
 <body>
-    <section>
-        <img src="https://amagi.dev/vfx-js/vfx-js-logo-no-padding.svg" data-delay="0.3" />
-    </section>
+    <main class="w-full min-h-screen bg-cover flex lg:flex-row flex-col"
+        style="background: url('/static/img/school.webp') no-repeat center center;">
+        <div x-transition
+            class="flex lg:min-h-screen min-h-[50vh] xl:w-9/12 lg:p-0 py-24 w-full bg-black bg-opacity-[50%] filter backdrop-blur flex flex-col text-center items-center justify-center">
+            <img src="/static/img/logo.svg"
+                class="w-[256px] h-[124px] xl:w-[431px] xl:h-[208px] lg:w-[265px] lg:h-[128px]" alt="">
+        </div>
+        <div class="xl:w-3/12 lg:min-h-screen min-h-[50vh] w-full p-12 bg-white">
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <!-- Email Address -->
+                <div>
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                        required autofocus autocomplete="username" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
+
+                <!-- Password -->
+                <div class="mt-4">
+                    <x-input-label for="password" :value="__('Password')" />
+
+                    <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                        autocomplete="current-password" />
+
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                </div>
+
+                <!-- Remember Me -->
+                <div class="block mt-4">
+                    <label for="remember_me" class="inline-flex items-center">
+                        <input id="remember_me" type="checkbox"
+                            class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
+                            name="remember">
+                        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    @if (Route::has('password.request'))
+                        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
+
+                    <x-primary-button class="ms-3">
+                        {{ __('Log in') }}
+                    </x-primary-button>
+                </div>
+            </form>
+        </div>
+    </main>
     <script type="module" src="/static/js/vfx.js"></script>
 </body>
 
