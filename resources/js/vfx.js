@@ -1,4 +1,4 @@
-import { VFX } from "https://esm.sh/@vfx-js/core@0.5.2";
+import { VFX } from "@vfx-js/core";
 
 const shader = `
 precision highp float;
