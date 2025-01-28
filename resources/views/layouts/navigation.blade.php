@@ -75,6 +75,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('grade_report_view')" :active="request()->routeIs('grade_report_view')">
+                {{ __('Grade report view') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

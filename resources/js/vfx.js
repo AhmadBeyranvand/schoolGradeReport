@@ -192,9 +192,9 @@ for (const e of document.querySelectorAll('img')) {
       width: data.width ?? 0.2,
       
       // Number of pixel layers.
-      layers: data.layers ?? 100,
+      layers: data.layers ?? 8,
             
-      speed: data.speed ?? 0.75, 
+      speed: data.speed ?? 0.3, 
       delay: data.delay ?? 0,      
       
     }
