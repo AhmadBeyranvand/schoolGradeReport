@@ -11,8 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
@@ -21,9 +19,8 @@ return new class extends Migration
             $table->string('national_code');
             $table->bigInteger('classroom_id');
             $table->bigInteger('user_id');
+            $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
