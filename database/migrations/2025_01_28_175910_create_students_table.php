@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('national_code');
             $table->bigInteger('classroom_id');
             $table->bigInteger('user_id');
-            $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
