@@ -39,7 +39,7 @@ return [
 
     // Direction, according to language
     // (left-to-right vs right-to-left)
-    'html_direction' => 'ltr',
+    'html_direction' => 'rtl',
 
     // ----
     // HEAD
@@ -63,7 +63,7 @@ return [
     'home_link' => '',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo' => '<b>Back</b>pack',
+    'project_logo' => env("APP_NAME"),
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
@@ -86,7 +86,8 @@ return [
     // ---------
 
     // Show "Getting Started with Backpack" info block?
-    'show_getting_started' => env('APP_ENV') == 'local',
+    // 'show_getting_started' => env('APP_ENV') == 'local',
+    'show_getting_started' => false,
 
     // -------------
     // GLOBAL STYLES
