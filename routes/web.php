@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
@@ -17,10 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('/admin')->group(function () {
-    Route::get("/uu", [ProfileController::class, 'uu']);
-
-})->middleware(IsAdmin::class);
+Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function () {
+    Route::get("/", [AdminController::class, 'showDashboard'])->name('admin_dashboard');
+});
 
 
 
