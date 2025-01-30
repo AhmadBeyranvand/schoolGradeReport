@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->tinyInteger('level');
+            $table->tinyInteger('field_id');
             $table->timestamps();
         });
     }
