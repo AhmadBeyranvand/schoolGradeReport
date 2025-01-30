@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('semesters', function (Blueprint $table) {
+        Schema::create('grades', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('year');
-            $table->bigInteger('part');
-            $table->string('label');
+            $table->bigInteger('student_id');
+            $table->bigInteger('course_id');
+            $table->decimal('amount');
+            $table->bigInteger('semester_id');
+            $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('semesters');
+        Schema::dropIfExists('grades');
     }
 };
