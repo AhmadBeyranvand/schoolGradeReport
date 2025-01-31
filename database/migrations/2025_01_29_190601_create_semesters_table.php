@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('year');
             $table->bigInteger('part');
-            $table->string('label');
+            $table->string('label')->nullable();
             $table->timestamps();
         });
     }

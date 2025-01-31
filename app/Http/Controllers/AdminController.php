@@ -10,4 +10,8 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
+
+    public function showNewSemesterGrade() {
+        return view('admin.new-grade');
+    }
 }

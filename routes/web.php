@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function () {
     Route::get("/", [AdminController::class, 'showDashboard'])->name('admin_dashboard');
+    Route::get("/newSemesterGrade", [AdminController::class, 'showNewSemesterGrade'])->name('new_semester_grade');
 });
 
 
