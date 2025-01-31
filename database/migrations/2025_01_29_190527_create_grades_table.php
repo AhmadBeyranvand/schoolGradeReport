@@ -16,7 +16,8 @@ return new class extends Migration
             $table->bigInteger('student_id');
             $table->bigInteger('course_id');
             $table->decimal('amount');
-            $table->bigInteger('semester_id');
+            $table->tinyInteger("semester");
+            $table->integer("year");
             $table->timestamps();
         });
     }
