@@ -14,13 +14,20 @@ class FieldsSeeder extends Seeder
     public function run(): void
     {
         Field::create([
+            'id' => 1,
             'title' => 'تجربی'
         ]);
         Field::create([
+            'id' => 2,
             'title' => 'ریاضی'
         ]);
         Field::create([
+            'id' => 3,
             'title' => 'انسانی'
+        ]);
+        Field::create([
+            'id' => 4,
+            'title' => 'عمومی'
         ]);
     }
 }
