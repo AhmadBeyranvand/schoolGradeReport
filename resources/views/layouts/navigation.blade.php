@@ -49,7 +49,7 @@
                             </div>
                         </button>
                     </x-slot>
-                    <div x-show="open" x-transition class="absolute bg-white flex flex-col rounded-lg border border-gray-200">
+                    <div x-show="open" x-transition class="absolute bg-white flex flex-col rounded-lg border border-gray-200" style="width:120px">
                         <x-dropdown-link class="py-2 px-10" :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>

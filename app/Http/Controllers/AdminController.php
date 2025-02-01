@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,7 +12,10 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function showNewSemesterGrade() {
-        return view('admin.new-grade');
+    public function showNewSemester()
+    {
+        $date = \Morilog\Jalali\Jalalian::now();
+        $classrooms = Classroom::all();
+        return view('admin.newgrade.semester_class_select', ["year" => $date->getYear(), 'classrooms' => $classrooms]);
     }
 }

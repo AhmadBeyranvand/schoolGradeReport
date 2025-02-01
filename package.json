@@ -17,6 +17,7 @@
         "vite": "^6.0"
     },
     "dependencies": {
-        "@vfx-js/core": "^0.6.0"
+        "@vfx-js/core": "^0.6.0",
+        "datatables.net-dt": "^2.2.1"
     }
 }
