@@ -12,7 +12,7 @@
                     <div class="w-full flex md:flex-row flex-col">
                         <div class="w-full">
                         <form action="" 
-                        class="mx-auto w-full bg-white dark:bg-gray-900 w-full mb-3 border-b border-gray-200 rounded-lg p-3 "
+                        class="mx-auto w-full bg-white dark:bg-gray-900 w-full mb-3 rounded-lg p-3 "
                             method="post">
                                 {{csrf_field()}}
                                 <div class="flex md:gap-8 gap-6 items-end md:my-5 my-8 flex md:flex-row flex-col justify-between items-center">
