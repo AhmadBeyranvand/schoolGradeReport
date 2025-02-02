@@ -14,12 +14,12 @@ class AdminController extends Controller
 
     public function showNewSemester()
     {
+        $classrooms = Classroom::all();
         $date = \Morilog\Jalali\Jalalian::now();
-        return view('admin.newgrade.semester_class_select', ["year" => $date->getYear()]);
+        return view('admin.newgrade.semester_class_select', ["year" => $date->getYear(), 'classrooms' => $classrooms]);
     }
     public function showGradesInput(){
-        $classrooms = Classroom::all();
-        return view('admin.newgrade.grade_input', ['classrooms' => $classrooms]);
+        return view('admin.newgrade.grade_input', []);
         
     }
 }

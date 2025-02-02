@@ -22,7 +22,7 @@ Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function ()
     Route::get("/", [AdminController::class, 'showDashboard'])->name('admin_dashboard');
     Route::prefix("/semester")->group( function(){
         Route::get("/new", [AdminController::class, 'showNewSemester'])->name('new_semester_grade');
-        Route::post("/gradesInput", [AdminController::class, 'showGradesInput'])->name('grades_input');
+        Route::get("/gradesInput", [AdminController::class, 'showGradesInput'])->name('grades_input');
     });
 });
 
