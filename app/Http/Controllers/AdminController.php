@@ -15,7 +15,11 @@ class AdminController extends Controller
     public function showNewSemester()
     {
         $date = \Morilog\Jalali\Jalalian::now();
+        return view('admin.newgrade.semester_class_select', ["year" => $date->getYear()]);
+    }
+    public function showGradesInput(){
         $classrooms = Classroom::all();
-        return view('admin.newgrade.semester_class_select', ["year" => $date->getYear(), 'classrooms' => $classrooms]);
+        return view('admin.newgrade.grade_input', ['classrooms' => $classrooms]);
+        
     }
 }
