@@ -32,7 +32,6 @@
 							<label for="classrooms">کلاس</label>
 							<select required id="classrooms" name="classroom_id" onclick="()=>{alert('ssss')}"
 								class=" dark:bg-gray-800 rounded-lg py-1 border-gray-200">
-								<option disabled selected>لطفا یک کلاس را انتخاب نمایید</option>
 								@foreach ($classrooms as $c)
 									<option value={{$c->id}}>{{$c->title}}</option>
 								@endforeach

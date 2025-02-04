@@ -16,12 +16,12 @@
 						href="{{route('new_semester_grade')}}">بازگشت به انتخاب سال و ترم تحصیلی</a>
 					<form action="" method="post" class="flex gap-2 items-end">
 						{{csrf_field()}}
-						
+
 						<x-primary-button>ادامه</x-primary-button>
 					</form>
 				</div>
 				<div class=" min-h-[60vh] w-full flex justify-center items-center">
-					<legend class="text-2	xl">لطفا کلاس را انتخاب کنید</legend>
+					<legend class="text-2xl">لطفا کلاس را انتخاب کنید</legend>
 				</div>
 			</div>
 		</div>
