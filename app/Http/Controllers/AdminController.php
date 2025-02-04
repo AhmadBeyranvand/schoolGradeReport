@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -25,12 +27,22 @@ class AdminController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'classroom_id'=>['required', 'exists:classrooms,id'],
+            'semester_part'=>['required','numeric','between:1,3'],
             'semester_year' => ['required','numeric', 'min:1400','max:1450']
         ]);
         if($validation->fails()){
             return redirect(route('new_semester_grade'))->withErrors($validation->errors());
         }
-        return view('admin.newgrade.grade_input', []);
+        $classroomID = $request->get('classroom_id');
+        $data = [];
+        $data['level'] = Classroom::find($classroomID)->level;
+        $data['courses'] = Course::where('level',$data['level'])->get(['id','title']);
+        $data['students'] = User::where([
+            ['isAdmin',false],
+            ['classroom_id', $classroomID]
+        ])->get();
+        // return $data;
+        return view('admin.newgrade.grade_input', $data);
 
     }
 }

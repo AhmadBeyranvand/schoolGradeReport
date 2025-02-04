@@ -231,7 +231,8 @@ return [
         'mobile_number' => 'شماره تماس',
         'work_number' => 'شماره تماس ثابت',
         'classroom_id' => "کد کلاس",
-        'semester_year' => 'سال تحصیلی'
+        'semester_year' => 'سال تحصیلی',
+        'semester_part' => 'ترم  تحصیلی'
     ],
 
 ];

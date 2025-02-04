@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html dir="rtl" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -29,7 +29,7 @@
                 <div x-data="{open : true}" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     {!! implode('', $errors->all('
                     <div class="bg-red-100 rounded-lg p-4 text-red-800 flex" x-show="open" x-on:click="open = false">
-                    :message
+                                :message
                                 <span class="px-3 py-1 cursor-pointer text-sm mr-auto bg-red-800 text-red-100 rounded">بستن</span>
                             </div>
                     ')) !!}
