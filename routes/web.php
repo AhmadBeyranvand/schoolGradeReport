@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
@@ -26,6 +27,7 @@ Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function ()
     Route::prefix("/semester")->group( function(){
         Route::get("/new", [AdminController::class, 'showNewSemester'])->name('new_semester_grade');
         Route::get("/gradesInput", [AdminController::class, 'showGradesInput'])->name('grades_input');
+        Route::post("/submitGrades", [GradeController::class, 'submitGrades'])->name('submit_grades');
     });
     Route::prefix("/api")->group(function (){
         Route::post("/getCourses/{id}", [CourseController::class,'coursesOfClassroom']);

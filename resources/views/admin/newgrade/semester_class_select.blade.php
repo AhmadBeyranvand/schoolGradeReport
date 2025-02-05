@@ -65,8 +65,8 @@
 							const title = book.title
 							const id = book.id
 							const bookElement = document.createElement("div")
-							bookElement.classList.add('flex', 'w-[160px]', 'flex-col', 'justify-center', 'p-3', 'm-3', 'cursor-pointer', 'bg-white', 'dark:bg-gray-900', 'border', 'border-gray-200', 'dark:border-gray-600', 'rounded-xl')
-							bookElement.setAttribute("x-bind:class", " course_id == "+id+" ? 'bg-blue-400 dark:bg-blue-500 bg-opacity-50' : 'bg-gray-200'")														
+							bookElement.classList.add('flex', 'w-[160px]', 'flex-col', 'justify-center', 'p-3', 'm-3', 'cursor-pointer',  'dark:bg-gray-900', 'border', 'border-gray-200', 'dark:border-gray-600', 'rounded-xl')
+							bookElement.setAttribute("x-bind:class", " course_id == "+id+" ? 'bg-blue-400 dark:bg-blue-500 bg-opacity-50' : ''")														
 							bookElement.setAttribute("x-on:click", " course_id = "+id )														
 							bookElement.setAttribute("x-transition","")														
 							const bookImg = document.createElement("img")

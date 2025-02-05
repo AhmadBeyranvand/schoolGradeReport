@@ -36,6 +36,11 @@ class AdminController extends Controller
         }
         $classroomID = $request->get('classroom_id');
         $data = [];
+        $data['course_id'] = $request->get('course_id');
+        $data['semester_year'] = $request->get('semester_year');
+        $data['classroom_id'] = $request->get('classroom_id');
+        $data['semester_part'] = $request->get('semester_part');
+
         $data['level'] = Classroom::find($classroomID)->level;
         $data['courses'] = Course::where('level',$data['level'])->get(['id','title']);
         $data['students'] = User::where([
