@@ -19,47 +19,107 @@
 				<div class=" min-h-[60vh] w-full flex justify-center items-center">
 					<form action="" class="w-full" method="post">
 						{{csrf_field()}}
-						<table id="dtTable" class="w-full text-center">
-							<thead>
-								<tr>
-									<th>کد ملی</th>
-									<th>نام</th>
-									<th>نام خانوادگی</th>
-									<th>نام پدر</th>
-									<th>نمره</th>
-									<th>عملیات</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach ($students as $st)
+						<div class="md:table hidden w-full">
+							<table id="dtTable" class="w-full text-center">
+								<thead>
+									<tr>
+										<th>کد ملی</th>
+										<th>نام</th>
+										<th>نام خانوادگی</th>
+										<th>نام پدر</th>
+										<th>نمره</th>
+										<th>عملیات</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach ($students as $st)
 									<tr>
 										<td>{{$st->national_code}}</td>
 										<td>{{$st->first_name}}</td>
 										<td>{{$st->last_name}}</td>
 										<td>{{$st->father_name}}</td>
 										<td>
-											<input class="border-gray-200 w-20 rounded-xl" value="0" type="number" name="grade" id="">
+											<input
+												class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-xl rounded-lg"
+												value="0" min="0" max="20" type="number" name="grade" id="">
 										</td>
 										<td>
-											<input class="border-gray-200 w-20 rounded-xl" value="0" type="number" name="grade" id="">
+											<input class="border-gray-200 w-20 rounded-xl" value="0" type="number"
+												name="grade" id="">
 										</td>
 									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+						<table class="md:hidden table" id="mobile">
+							<thead>
+								<tr>
+									<th scope="col">کد ملی</th>
+									<th scope="col">نام</th>
+									<th scope="col">نام خانوادگی</th>
+									<th scope="col">نام پدر</th>
+									<th scope="col">نمره</th>
+									<th scope="col">عملیات</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($students as $st)
+								<tr class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600">
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="کد ملی">
+										{{$st->national_code}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام">
+										{{$st->first_name}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام خانوادگی">
+										{{$st->last_name}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام پدر">
+										{{$st->father_name}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نمره">
+										<input
+											class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-xl rounded-lg"
+											min="0" max="20" type="number" name="grade" id="">
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="عملیات">
+										<p> lorem </p>
+									</td>
+								</tr>
 								@endforeach
 							</tbody>
 						</table>
 						<x-primary-button class="w-full justify-center py-3 text-lg">ثبت نمرات</x-primary-button>
+
 					</form>
 
 					<style>
+						.dt-input {
+							border-color: #dedede !important;
+							border-radius: 10px !important;
+						}
+
+						tr:hover {
+							background: rgba(0, 0, 0, 0.05) !important;
+						}
+
+						tr+tr {
+							border-top: 1px solid rgba(128, 128, 128, 0.2) !important;
+						}
+
 						th {
 							text-align: center !important;
 						}
+
 						.dt-layout-end {
 							margin: auto auto auto 0;
 						}
-						div.dt-container select.dt-input{
-							padding: 5px 20px;
+
+						div.dt-container select.dt-input {
+							padding: 5px 30px 5px 10px;
 						}
+
 						.dt-layout-start {
 							margin: auto 0 auto auto;
 						}

@@ -4,5 +4,6 @@ import languageFA from 'datatables.net-plugins/i18n/fa.mjs';
 let table = new DataTable('#dtTable', {
     pageLength:50,
     autoWidth:true,
-    language:languageFA
+    language:languageFA,
+    responsive: true
 });

@@ -1,4 +1,5 @@
 @import "../../node_modules/datatables.net-dt/css/dataTables.dataTables.css";
+@import url('./mobileTable.css');
 
 @tailwind base;
 @tailwind components;
