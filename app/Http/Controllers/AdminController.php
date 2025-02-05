@@ -28,7 +28,8 @@ class AdminController extends Controller
         $validation = Validator::make($request->all(), [
             'classroom_id'=>['required', 'exists:classrooms,id'],
             'semester_part'=>['required','numeric','between:1,3'],
-            'semester_year' => ['required','numeric', 'min:1400','max:1450']
+            'semester_year' => ['required','numeric', 'min:1400','max:1450'],
+            'course_id' =>['required','numeric', 'exists:courses,id']
         ]);
         if($validation->fails()){
             return redirect(route('new_semester_grade'))->withErrors($validation->errors());
