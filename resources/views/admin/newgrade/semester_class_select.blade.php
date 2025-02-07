@@ -16,14 +16,14 @@
 						<div class="flex flex-col">
 							<label for="semester_year">{{__("Semester Year")}}</label>
 							<input required name="semester_year" id="semester_year" value={{$year}} x-model="year"
-								class="dark:bg-gray-800 rounded-lg py-1 md:w-32 w-24 border-gray-200" type="number" min="1403"
-								max="1500" />
+								class="dark:bg-gray-800 rounded-lg py-1 md:w-32 w-24 border-gray-200" type="number"
+								min="1403" max="1500" />
 						</div>
 
 						<div class="flex flex-col ">
 							<label for="semester_part">ترم تحصیلی</label>
-							<select required class="dark:bg-gray-800 rounded-lg py-1  border-gray-200" name="semester_part"
-								id="semester_part">
+							<select required class="dark:bg-gray-800 rounded-lg py-1  border-gray-200"
+								name="semester_part" id="semester_part">
 								<option value="1">ترم اول</option>
 								<option value="2">ترم دوم</option>
 								<option value="3">ترم تابستانه</option>
@@ -49,28 +49,31 @@
 						<strong x-text="year"></strong>
 					</div>
 					<div id="booksContainer" class="min-h-[60vh] w-full flex justify-center items-center flex-wrap">
-						<!-- <legend class="text-2xl">لطفا مشخصات ترم و سال و کلاس را انتخاب کنید</legend> -->
+						<div class="flex flex-col" id="no-book">
+							<canvas style="width:600px" id="lottie-book"></canvas>
+							<legend class="md:text-2xl text-sm text-center text-[#264984] mt-3 font-thin">لطفا مشخصات ترم و سال و کلاس را انتخاب کنید</legend>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<script>
 			const bookHolder = document.getElementById("booksContainer")
-			function getCourse(){
+			function getCourse() {
 				bookHolder.innerHTML = null
 				const classroom_id = document.getElementById("classroom_id").value
 				axios.post(`/admin/api/getCourses/${classroom_id}`)
-					.then(res=>{
-						res.data.map(book=>{
+					.then(res => {
+						res.data.map(book => {
 							const title = book.title
 							const id = book.id
 							const bookElement = document.createElement("div")
-							bookElement.classList.add('flex', 'w-[160px]', 'flex-col', 'justify-center', 'p-3', 'm-3', 'cursor-pointer',  'dark:bg-gray-900', 'border', 'border-gray-200', 'dark:border-gray-600', 'rounded-xl')
-							bookElement.setAttribute("x-bind:class", " course_id == "+id+" ? 'bg-blue-400 dark:bg-blue-500 bg-opacity-50' : ''")														
-							bookElement.setAttribute("x-on:click", " course_id = "+id )														
-							bookElement.setAttribute("x-transition","")														
+							bookElement.classList.add('flex', 'w-[160px]', 'flex-col', 'justify-center', 'p-3', 'm-3', 'cursor-pointer', 'dark:bg-gray-900', 'border', 'border-gray-200', 'dark:border-gray-600', 'rounded-xl')
+							bookElement.setAttribute("x-bind:class", " course_id == " + id + " ? 'bg-blue-400 dark:bg-blue-500 bg-opacity-50' : ''")
+							bookElement.setAttribute("x-on:click", " course_id = " + id)
+							bookElement.setAttribute("x-transition", "")
 							const bookImg = document.createElement("img")
-							bookImg.src="/static/books/"+id+".jpg"
+							bookImg.src = "/static/books/" + id + ".jpg"
 							bookImg.classList.add("rounded-xl")
 							const bookTitle = document.createElement('strong')
 							bookTitle.innerHTML = title
@@ -79,6 +82,9 @@
 							bookElement.appendChild(bookTitle)
 							bookHolder.append(bookElement)
 						})
+					})
+					.finally(()=>{
+						document.getElementById("no-book").remove()
 					})
 			}
 			// classroom_id.

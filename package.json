@@ -17,6 +17,7 @@
         "vite": "^6.0"
     },
     "dependencies": {
+        "@lottiefiles/dotlottie-web": "^0.40.1",
         "@vfx-js/core": "^0.6.0",
         "datatables.net-dt": "^2.2.1",
         "datatables.net-plugins": "^2.2.1"
