@@ -37,21 +37,21 @@
 								</thead>
 								<tbody>
 									@foreach ($students as $st)
-										<tr>
-											<td>{{$st->national_code}}</td>
-											<td>{{$st->first_name}}</td>
-											<td>{{$st->last_name}}</td>
-											<td>{{$st->father_name}}</td>
-											<td>
-												<input
-													class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-xl rounded-lg"
-													value={{$st['grade']}} min="0" step="0.01" max="20" type="number" name="student[{{$st->id}}]" >
-											</td>
-											<td>
-												<input class="border-gray-200 w-20 rounded-xl" value="0" type="number"
-													id="">
-											</td>
-										</tr>
+									<tr>
+										<td>{{$st->national_code}}</td>
+										<td>{{$st->first_name}}</td>
+										<td>{{$st->last_name}}</td>
+										<td>{{$st->father_name}}</td>
+										<td>
+											<input
+												class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-xl rounded-lg"
+												value={{$st['grade']}} min="0" step="0.01" max="20" type="number"
+												name="student[{{$st->id}}]">
+										</td>
+										<td>
+											<button type="submit" tabindex="-1">تاریخچه</button>
+										</td>
+									</tr>
 									@endforeach
 								</tbody>
 							</table>
@@ -69,28 +69,28 @@
 							</thead>
 							<tbody>
 								@foreach ($students as $st)
-									<tr class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600">
-										<td class="border-b border-gray-200 dark:border-gray-600" data-label="کد ملی">
-											{{$st->national_code}}
-										</td>
-										<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام">
-											{{$st->first_name}}
-										</td>
-										<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام خانوادگی">
-											{{$st->last_name}}
-										</td>
-										<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام پدر">
-											{{$st->father_name}}
-										</td>
-										<td class="border-b border-gray-200 dark:border-gray-600" data-label="نمره">
-											<input
-												class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-xl rounded-lg"
-												value="0" min="0" max="20" type="number" name="grade[{{$st->id}}]">
-										</td>
-										<td class="border-b border-gray-200 dark:border-gray-600" data-label="عملیات">
-											<p> lorem </p>
-										</td>
-									</tr>
+								<tr class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600">
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="کد ملی">
+										{{$st->national_code}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام">
+										{{$st->first_name}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام خانوادگی">
+										{{$st->last_name}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام پدر">
+										{{$st->father_name}}
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نمره">
+										<input
+											class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-xl rounded-lg"
+											value="0" min="0" max="20" type="number" name="grade[{{$st->id}}]">
+									</td>
+									<td class="border-b border-gray-200 dark:border-gray-600" data-label="عملیات">
+										<p> lorem </p>
+									</td>
+								</tr>
 								@endforeach
 							</tbody>
 						</table>
@@ -130,7 +130,7 @@
 					</style>
 
 					<script>
-						if(window.outerWidth>=768){
+						if (window.outerWidth >= 768) {
 							document.getElementById("mobile").remove()
 						} else {
 							document.getElementById("desktopTable").remove()

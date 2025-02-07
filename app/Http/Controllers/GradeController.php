@@ -20,8 +20,7 @@ class GradeController extends Controller
             'classroom_id' => ['required', 'exists:classrooms,id'],
             'semester_part' => ['required', 'numeric', 'between:1,3'],
             'semester_year' => ['required', 'numeric', 'min:1400', 'max:1450'],
-            'course_id' => ['required', 'numeric', 'exists:courses,id'],
-            // 'grade.*' => [ 'exists:users,id']
+            'course_id' => ['required', 'numeric', 'exists:courses,id']
         ]);
         if ($validation->fails()) {
             return redirect(route('grades_input'))->withInput()->withErrors($validation->errors());
@@ -30,6 +29,7 @@ class GradeController extends Controller
         $year = intval($request->get('semester_year'));
         $semester = intval($request->get('semester_part'));
         $course_id = intval($request->get('course_id'));
+        $classroom_id = intval($request->get('classroom_id'));
         foreach ($grades as $student_id => $amount) {
             $searchGrade = Grade::where("student_id", $student_id)
                 ->where("course_id", $course_id)
@@ -51,7 +51,12 @@ class GradeController extends Controller
                 $oldGrade->save();
             }
         }
-        return redirect(route('grades_input', $request))
-        ->with("status",__("Scores were successfully recorded!"));
+        return redirect(route('grades_input', [
+            'course_id' => $course_id,
+            'semester_year' => $year,
+            'semester_part' => $semester,
+            'classroom_id' => $classroom_id,
+        ]))
+        ->with("status", __('Scores were successfully recorded!'));
     }
 }
