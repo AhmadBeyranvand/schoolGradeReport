@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classroom;
 use App\Models\Course;
+use App\Models\Grade;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -42,12 +43,19 @@ class AdminController extends Controller
         $data['semester_part'] = $request->get('semester_part');
 
         $data['level'] = Classroom::find($classroomID)->level;
-        $data['courses'] = Course::where('level',$data['level'])->get(['id','title']);
+        // $data['courses'] = Course::where('level',$data['level'])->get(['id','title']);
         $data['students'] = User::where([
             ['isAdmin',false],
             ['classroom_id', $classroomID]
-        ])->get();
-        // return $data;
+        ])->get(['id', 'first_name','last_name','father_name','national_code','classroom_id']);
+        foreach($data['students'] as $st){
+            $st['grade'] = floatval(
+                                Grade::where("student_id", $st->id)
+                                ->where("course_id", $data['course_id'])
+                                ->where("semester", $data['semester_part'])
+                                ->where("year", $data['semester_year'])
+                                ->get(['amount'])[0]['amount'] ?? 0);
+        }
         return view('admin.newgrade.grade_input', $data);
 
     }
