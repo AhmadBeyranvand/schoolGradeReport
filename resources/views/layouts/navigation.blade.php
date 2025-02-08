@@ -12,7 +12,7 @@
                 <!-- Navigation Links -->
                 @if (auth()->check() && auth()->user()->isAdmin)
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('admin_dashboard')">
+                    <x-nav-link :href="route('admin_dashboard')" :active="request()->routeIs('admin_dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>

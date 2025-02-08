@@ -17,7 +17,6 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
-    
     public function showNewSemester()
     {
         $classrooms = Classroom::orderBy('level')->get();
@@ -57,6 +56,9 @@ class AdminController extends Controller
                                 ->get(['amount'])[0]['amount'] ?? 0);
         }
         return view('admin.newgrade.grade_input', $data);
+
+    }
+    public function showStudentManager(){
 
     }
 }
