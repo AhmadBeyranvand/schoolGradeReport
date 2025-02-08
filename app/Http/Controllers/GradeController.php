@@ -43,10 +43,12 @@ class GradeController extends Controller
                 $grade->amount = floatval($amount);
                 $grade->semester = $semester;
                 $grade->year = $year;
+                $grade->user_submitted_id = auth()->id();
                 $grade->saveOrFail();
             } else {
                 // $grade_id = $oldGrade->get('id');
                 $oldGrade = $searchGrade->first();
+                $oldGrade->user_submitted_id = auth()->id();
                 $oldGrade->amount = floatval($amount);
                 $oldGrade->save();
             }

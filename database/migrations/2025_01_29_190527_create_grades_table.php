@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('student_id');
+            $table->bigInteger('user_submitted_id');
             $table->bigInteger('course_id');
             $table->decimal('amount');
             $table->tinyInteger("semester");

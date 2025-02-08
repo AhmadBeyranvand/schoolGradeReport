@@ -34,7 +34,7 @@
 											<td>
 												@foreach ($classrooms as $c)
 													@if ($st->classroom_id == $c->id)
-														{{$c->title}}
+														{{$c->id}} - {{$c->title}}
 													@endif
 												@endforeach
 											</td>

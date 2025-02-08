@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Grade;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Morilog\Jalali\Jalalian;
 use Validator;
 
 class AdminController extends Controller
@@ -21,7 +22,7 @@ class AdminController extends Controller
     public function showNewSemester()
     {
         $classrooms = Classroom::orderBy('level')->get();
-        $date = \Morilog\Jalali\Jalalian::now();
+        $date = Jalalian::now();
         return view('admin.newgrade.semester_class_select', ["year" => $date->getYear(), 'classrooms' => $classrooms]);
     }
     public function showGradesInput(Request $request)
@@ -81,11 +82,19 @@ class AdminController extends Controller
             return redirect(route('show_student_manager'))->withErrors($validation->errors());
         }
         $student = User::find($id);
-        $grades = Grade::where('student_id', $id)->get();
-        return $grades;
+        $data = [];
+        $grades = Grade::where('student_id', $id)->orderBy('year', 'desc')->get();
+        foreach ($grades as $key => $grade) {
+            $course_title = Course::find($grade->course_id)->title;
+            array_push($data, [
+                'title' => $course_title,
+                'amount' => floatval($grade->amount),
+                'time' => Jalalian::forge($grade->updated_at)->format('%A, %d %B %Y'),
+                'author' => User::find($grade->user_submitted_id)
+            ]);
+        }
+        return view('admin.studentManager.grades', ['grades' => $data, 'student' => $student]);
 
-        // $classrooms = Classroom::all();
-        // return view("admin.studentManager.list", ['students'=>$students, 'classrooms'=>$classrooms]);
     }
     public function updateStudent($id, Request $request)
     {

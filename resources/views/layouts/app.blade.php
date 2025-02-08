@@ -18,9 +18,14 @@
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
+            <header class="bg-white dark:bg-gray-800 shadow ">
+                <div class="max-w-7xl flex items-center mx-auto">
+                    @if(!Route::is('dashboard') && !Route::is('admin_dashboard'))
+                    <x-secondary-button onclick="window.history.back()">بازگشت</x-secondary-button>
+                    @endif
+                    <div class=" py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
                 </div>
             </header>
         @endisset
@@ -48,11 +53,11 @@
             <div class="pt-4">
                 <div x-data="{open : true}" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     {!! implode('', $errors->all('
-                                            <div class="bg-red-100 my-2 rounded-lg p-4 text-red-800 flex" x-show="open" x-on:click="open = false">
-                                                        :message
-                                                        <span class="px-3 py-1 cursor-pointer text-sm mr-auto bg-red-800 text-red-100 rounded">بستن</span>
-                                                    </div>
-                                            ')) !!}
+                                                    <div class="bg-red-100 my-2 rounded-lg p-4 text-red-800 flex" x-show="open" x-on:click="open = false">
+                                                                :message
+                                                                <span class="px-3 py-1 cursor-pointer text-sm mr-auto bg-red-800 text-red-100 rounded">بستن</span>
+                                                            </div>
+                                                    ')) !!}
                 </div>
             </div>
         @endif
