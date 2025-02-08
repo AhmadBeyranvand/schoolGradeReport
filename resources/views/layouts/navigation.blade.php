@@ -84,12 +84,21 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+        @if (auth()->check() && auth()->user()->isAdmin)
+            <x-responsive-nav-link :href="route('admin_dashboard')" :active="request()->routeIs('admin_dashboard')">
+                {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('new_semester_grade')" :active="request()->routeIs('new_semester_grade')">
+                {{ __('New semester grade input') }}
+            </x-responsive-nav-link>
+        @else
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('grade_report_view')" :active="request()->routeIs('grade_report_view')">
                 {{ __('Grade report view') }}
             </x-responsive-nav-link>
+        @endif
         </div>
 
         <!-- Responsive Settings Options -->
