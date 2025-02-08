@@ -30,7 +30,10 @@ Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function ()
         Route::post("/submitGrades", [GradeController::class, 'submitGrades'])->name('submit_grades');
     });
     Route::prefix("/studentManager")->group( function(){
-        Route::get('/',[AdminController::class, 'showStudentManager']);
+        Route::get('/',[AdminController::class, 'showStudentManager'])->name('show_student_manager');
+        Route::get('/edit/{id}',[AdminController::class, 'showStudentEdit'])->name('show_student_edit');
+        Route::post('/edit/{id}',[AdminController::class, 'updateStudent'])->name('update_student');
+        Route::get('/grades/{id}',[AdminController::class, 'showStudentGrades'])->name('show_student_grades');
     });
     Route::prefix("/api")->group(function (){
         Route::post("/getCourses/{id}", [CourseController::class,'coursesOfClassroom']);

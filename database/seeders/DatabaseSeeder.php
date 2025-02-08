@@ -19,12 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CourseSeeder::class);
         $this->call(ClassroomSeeder::class);
         $this->call(StudentsSeeder::class);
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => Hash::make("12345678")
-        ]);
         User::factory()->create([
             'name' => 'Test Admin',
             'isAdmin' => true,

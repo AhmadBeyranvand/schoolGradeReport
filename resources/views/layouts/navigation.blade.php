@@ -21,6 +21,11 @@
                         {{ __('New semester grade input') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('show_student_manager')" :active="request()->routeIs('show_student_manager')">
+                        {{ __('Student manager') }}
+                    </x-nav-link>
+                </div>
                 @else
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -90,6 +95,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('new_semester_grade')" :active="request()->routeIs('new_semester_grade')">
                 {{ __('New semester grade input') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('show_student_manager')" :active="request()->routeIs('show_student_manager')">
+                {{ __('Student manager') }}
             </x-responsive-nav-link>
         @else
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

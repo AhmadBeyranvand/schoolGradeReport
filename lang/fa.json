@@ -1161,5 +1161,15 @@
     "New semester grade input": "ورود نمرات",
     "Semester Year": "سال تحصیلی",
     "Scores were successfully recorded!": "نمرات با موفقیت ثبت شدند!",
-    "profile updated": "پروفایل شما به‌روز‌رسانی شد"
+    "profile updated": "پروفایل شما به‌روز‌رسانی شد",
+    "Student manager": "مدیریت دانش‌آموزان",
+    "Display name": "نام نمایشی",
+    "Father name": "نام پدر",
+    "First name":"نام",
+    "Last name":"نام خانوادگی",
+    "Classroom name":"نام کلاس",
+    "National code":"کدملی",
+    "E-mail":"ایمیل",
+    "Phone":"شماره تلفن",
+    "New password": "رمزعبور جدید" 
 }
