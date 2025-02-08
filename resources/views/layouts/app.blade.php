@@ -34,15 +34,25 @@
                 </div>
             </div>
         @endif
+        @if(session('error'))
+            <div class="pt-4">
+                <div x-data="{open : true}" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-red-100 my-2 rounded-lg p-4 text-red-800 flex" x-show="open" x-on:click="open = false">
+                        {{ session('error') }}
+                        <span class="px-3 py-1 cursor-pointer text-sm mr-auto bg-red-800 text-red-100 rounded">بستن</span>
+                    </div>
+                </div>
+            </div>
+        @endif
         @if($errors->any())
             <div class="pt-4">
                 <div x-data="{open : true}" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     {!! implode('', $errors->all('
-                                    <div class="bg-red-100 my-2 rounded-lg p-4 text-red-800 flex" x-show="open" x-on:click="open = false">
-                                                :message
-                                                <span class="px-3 py-1 cursor-pointer text-sm mr-auto bg-red-800 text-red-100 rounded">بستن</span>
-                                            </div>
-                                    ')) !!}
+                                            <div class="bg-red-100 my-2 rounded-lg p-4 text-red-800 flex" x-show="open" x-on:click="open = false">
+                                                        :message
+                                                        <span class="px-3 py-1 cursor-pointer text-sm mr-auto bg-red-800 text-red-100 rounded">بستن</span>
+                                                    </div>
+                                            ')) !!}
                 </div>
             </div>
         @endif

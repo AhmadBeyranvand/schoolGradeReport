@@ -37,6 +37,9 @@ class UserController extends Controller
         $data = [];
         $userInfo = [];
         $gradeItem = Grade::where('student_id', auth()->id());
+        if(!$gradeItem->exists()){
+            return redirect(route('dashboard'))->with('error', __("No grades have yet been made for you!"));
+        }
         $lastYear = $gradeItem->orderBy('year', 'desc')->first()->year;
         $lastSemester = $gradeItem->orderBy('semester', 'desc')->first()->semester;
 

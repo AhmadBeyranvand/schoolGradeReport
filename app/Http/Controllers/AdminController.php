@@ -74,15 +74,21 @@ class AdminController extends Controller
     }
     public function showStudentGrades($id)
     {
+        $validation = Validator::make(['id' => $id], [
+            'id' => ['required', 'exists:users,id']
+        ]);
+        if ($validation->fails()) {
+            return redirect(route('show_student_manager'))->withErrors($validation->errors());
+        }
         $student = User::find($id);
-        return $student;
+        $grades = Grade::where('student_id', $id)->get();
+        return $grades;
 
         // $classrooms = Classroom::all();
         // return view("admin.studentManager.list", ['students'=>$students, 'classrooms'=>$classrooms]);
     }
     public function updateStudent($id, Request $request)
     {
-        // return $request;
         $validator = Validator::make($request->all(), [
             "first_name" => ['required'],
             "last_name" => ['required'],
@@ -90,7 +96,7 @@ class AdminController extends Controller
             "national_code" => ['required'],
             "email" => ['required', 'email'],
             "phone" => ['required'],
-            "password" => ['nullable','min:8'],
+            "password" => ['nullable', 'min:8'],
             "classroom_id" => ['required', 'exists:classrooms,id'],
         ]);
         if ($validator->fails()) {
