@@ -13,12 +13,7 @@ class UserController extends Controller
     private function replaceNumbersWithWords($input)
     {
         $replace = array(
-            1 => 'اول',
-            2 => 'دوم',
-            3 => 'سوم',
-            4 => 'چهارم',
-            5 => 'پنجم',
-            6 => 'ششم',
+
             7 => 'هفتم',
             8 => 'هشتم',
             9 => 'نهم',
@@ -75,7 +70,7 @@ class UserController extends Controller
         $lastSemester = $gradeItem->orderBy('semester', 'desc')->first()->semester;
 
         $userInfo['year'] = $lastYear;
-        $userInfo['level'] = $this->replaceNumbersWithWords(Classroom::find(auth()->user()->classroom_id)->level);
+        $userInfo['level'] = $this->replaceNumbersWithWords(intval(Classroom::find(auth()->user()->classroom_id)->level));
         $userInfo['semester'] = $this->replaceNumbersWithWords($lastSemester);
         $grades = Grade::where('student_id', auth()->id())
             ->where('year', $lastYear)
