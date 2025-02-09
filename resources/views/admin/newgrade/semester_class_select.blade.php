@@ -49,9 +49,10 @@
 						<strong x-text="year"></strong>
 					</div>
 					<div id="booksContainer" class="min-h-[60vh] w-full flex justify-center items-center flex-wrap">
-						<div class="flex flex-col" id="no-book">
-							<canvas style="width:600px" id="lottie-book"></canvas>
-							<legend class="md:text-2xl text-sm text-center text-[#264984] mt-3 font-thin">لطفا مشخصات ترم و سال و کلاس را انتخاب کنید</legend>
+						<div class="" id="no-book">
+							<canvas id="lottie-book" style="width: 600px;"></canvas>
+							<legend class="md:text-2xl text-sm text-center text-[#264984] mt-3 font-thin">لطفا مشخصات
+								ترم و سال و کلاس را انتخاب کنید</legend>
 						</div>
 					</div>
 				</div>
@@ -83,8 +84,8 @@
 							bookHolder.append(bookElement)
 						})
 					})
-					.finally(()=>{
-						document.getElementById("no-book").remove()
+					.finally(() => {
+						// document.getElementById("no-book").remove()
 					})
 			}
 			// classroom_id.
