@@ -40,9 +40,11 @@
 											</td>
 											<td>
 												<a href={{route("show_student_edit", ['id' => $st->id])}}
-													class="bg-indigo-400 hover:bg-indigo-600 rounded mx-1 p-1 text-xs text-white">ویرایش اطلاعات</a>
+													class="bg-indigo-400 hover:bg-indigo-600 rounded mx-1 p-1 text-xs text-white">ویرایش
+													اطلاعات</a>
 												<a href={{route("show_student_grades", ['id' => $st->id])}}
-													class="bg-emerald-600 hover:bg-emerald-700 rounded mx-1 p-1 text-xs text-white">مشاهده نمرات</a>
+													class="bg-emerald-600 hover:bg-emerald-700 rounded mx-1 p-1 text-xs text-white">مشاهده
+													نمرات</a>
 											</td>
 										</tr>
 									@endforeach
@@ -56,7 +58,7 @@
 									<th scope="col">نام</th>
 									<th scope="col">نام خانوادگی</th>
 									<th scope="col">نام پدر</th>
-									<th scope="col">نمره</th>
+									<th scope="col">کلاس</th>
 									<th scope="col">عملیات</th>
 								</tr>
 							</thead>
@@ -75,13 +77,21 @@
 										<td class="border-b border-gray-200 dark:border-gray-600" data-label="نام پدر">
 											{{$st->father_name}}
 										</td>
-										<td class="border-b border-gray-200 dark:border-gray-600" data-label="نمره">
-											<input
-												class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-lg rounded"
-												value={{$st['grade']}} min="0" step="0.01" max="20" type="number" name="student[{{$st->id}}]">
+
+										<td class="border-b border-gray-200 dark:border-gray-600" data-label="کلاس">
+											@foreach ($classrooms as $c)
+												@if ($st->classroom_id == $c->id)
+													{{$c->id}} - {{$c->title}}
+												@endif
+											@endforeach
 										</td>
 										<td class="border-b border-gray-200 dark:border-gray-600" data-label="عملیات">
-											<p> lorem </p>
+											<a href={{route("show_student_edit", ['id' => $st->id])}}
+												class="bg-indigo-400 hover:bg-indigo-600 rounded mx-1 p-1 text-xs text-white">ویرایش
+												اطلاعات</a>
+											<a href={{route("show_student_grades", ['id' => $st->id])}}
+												class="bg-emerald-600 hover:bg-emerald-700 rounded mx-1 p-1 text-xs text-white">مشاهده
+												نمرات</a>
 										</td>
 									</tr>
 								@endforeach

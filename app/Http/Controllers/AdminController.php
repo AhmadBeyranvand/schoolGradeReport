@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Morilog\Jalali\Jalalian;
 use Validator;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -108,9 +109,9 @@ class AdminController extends Controller
             "first_name" => ['required'],
             "last_name" => ['required'],
             "father_name" => ['required'],
-            "national_code" => ['required'],
-            "email" => ['required', 'email'],
-            "phone" => ['required'],
+            "national_code" => ['required',Rule::unique('users')->ignore($id)],
+            "email" => ['required', 'email', Rule::unique('users')->ignore($id)],
+            "phone" => ['required', Rule::unique('users')->ignore($id)],
             "password" => ['nullable', 'min:8'],
             "classroom_id" => ['required', 'exists:classrooms,id'],
         ]);
