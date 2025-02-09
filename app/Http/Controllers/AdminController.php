@@ -17,10 +17,11 @@ class AdminController extends Controller
     }
     public function showDashboard()
     {
+        $noData = (Grade::all()->count() > 0) ? false : true;
         $data = [
-            'countOfStudents' => User::where('isAdmin',false)->count(),
-            'lastGradeTime' => Jalalian::forge( Grade::orderBy('created_at', 'desc')->first()->created_at)->format('%Y/%m/%d  H:i'),
-            'numberOfRejected' => Grade::where("amount","<","10")->where("amount","<>",0)->count()
+            'countOfStudents' => User::where('isAdmin', false)->count(),
+            'lastGradeTime' => $noData ? "بدون نمره" : Jalalian::forge(Grade::orderBy('created_at', 'desc')->first()->created_at)->format('%Y/%m/%d  H:i'),
+            'numberOfRejected' => $noData ? "0" : Grade::where("amount", "<", "10")->where("amount", "<>", 0)->count()
         ];
         return view('admin.dashboard', $data);
     }

@@ -31,15 +31,18 @@ class UserController extends Controller
     public function showDashboard()
     {
         $gradeOfStudent = Grade::where("student_id", auth()->id());
-        $gradeOfStudent = $gradeOfStudent
-            ->where(
-                "year",
-                $gradeOfStudent->orderBy("year", "desc")->first()->year
-            )
-            ->where(
-                "semester",
-                $gradeOfStudent->orderByDesc("year")->orderByDesc("semester")->first()->semester
-            );
+        $noData = $gradeOfStudent->count() > 0 ? false : true;
+        if (!$noData) {
+            $gradeOfStudent = $gradeOfStudent
+                ->where(
+                    "year",
+                    $gradeOfStudent->orderBy("year", "desc")->first()->year
+                )
+                ->where(
+                    "semester",
+                    $gradeOfStudent->orderByDesc("year")->orderByDesc("semester")->first()->semester
+                );
+        }
         $data = [
             'countOfCourses' => Course::where(
                 'level',
@@ -53,8 +56,8 @@ class UserController extends Controller
             'countOfGrades' => $gradeOfStudent->count(),
             'numberOfAccepted' => $gradeOfStudent->where("amount", ">=", "10")->count(),
             // 'numberOfRejected' => $gradeOfStudent->where("amount", "<", "10")->where("amount", "<>", "0")->count(),
-            'firstGradeTime' => Jalalian::forge($gradeOfStudent->orderByDesc("created_at")->first()->created_at)->format("%A, %d/%m/%Y"),
-            'lastGradeTime' => Jalalian::forge($gradeOfStudent->orderBy("created_at")->first()->created_at)->format("%A, %d/%m/%Y")
+            'firstGradeTime' => $noData ? "بدون تاریخ" : Jalalian::forge($gradeOfStudent->orderByDesc("created_at")->first()->created_at)->format("%A, %d/%m/%Y"),
+            'lastGradeTime' => $noData ? "بدون تاریخ" : Jalalian::forge($gradeOfStudent->orderBy("created_at")->first()->created_at)->format("%A, %d/%m/%Y")
         ];
         $data['numberOfRejected'] = intval($data['countOfGrades']) - intval($data['numberOfAccepted']);
         // return $data;
