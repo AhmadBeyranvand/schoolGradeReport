@@ -87,4 +87,15 @@ class UserController extends Controller
         // return $data;
         return view('school.grade_report', ["grades" => $data, "userInfo" => $userInfo]);
     }
+
+    public function rootPage(){
+        if(auth()->check()){
+            if(auth()->user()->isAdmin){
+                return redirect(route('admin_dashboard'));
+            }
+            return redirect(route('dashboard'));
+        } 
+        return view('home');
+
+    }
 }

@@ -10,7 +10,7 @@ use App\Http\Middleware\IsAdmin;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () { return view('home'); })->middleware("guest");
+Route::get('/', [UserController::class, 'rootPage']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [UserController::class,'showDashboard'])->name('dashboard');
