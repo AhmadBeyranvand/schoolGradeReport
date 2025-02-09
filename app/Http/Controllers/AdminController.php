@@ -90,7 +90,7 @@ class AdminController extends Controller
                 'title' => $course_title,
                 'amount' => floatval($grade->amount),
                 'time' => Jalalian::forge($grade->updated_at)->format('%A, %d %B %Y'),
-                'author' => User::find($grade->user_submitted_id)
+                'author' => User::find($grade->user_submitted_id)->name
             ]);
         }
         return view('admin.studentManager.grades', ['grades' => $data, 'student' => $student]);

@@ -30,7 +30,7 @@
         <div x-transition
             class="flex lg:min-h-screen min-h-[50vh] xl:w-9/12 lg:p-0 py-24 w-full bg-black bg-opacity-[50%] filter backdrop-blur flex flex-col text-center items-center justify-center">
             <img src="/static/img/logo.svg"
-                class="glow w-[256px] h-[124px] xl:w-[431px] xl:h-[208px] lg:w-[265px] lg:h-[128px]" alt="">
+                class="glow w-[260px]  xl:w-[500px] lg:w-[300px]" alt="">
         </div>
         <div class="xl:w-3/12 lg:min-h-screen min-h-[50vh] w-full p-12 bg-white flex flex-col justify-center items-center">
             {{ $slot }}

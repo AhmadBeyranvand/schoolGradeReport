@@ -1,7 +1,7 @@
 <x-app-layout>
 	<x-slot name="header">
 		<h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-			{{ __('New semester grade input') }}
+			{{ __('Student manager') }}
 		</h2>
 	</x-slot>
 
@@ -87,7 +87,7 @@
 								@endforeach
 							</tbody>
 						</table>
-						<x-primary-button class="w-full justify-center py-3 text-lg">ثبت نمرات</x-primary-button>
+						<!-- <x-primary-button class="w-full justify-center py-3 text-lg">ثبت نمرات</x-primary-button> -->
 
 					</form>
 
