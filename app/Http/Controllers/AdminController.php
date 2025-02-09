@@ -17,7 +17,12 @@ class AdminController extends Controller
     }
     public function showDashboard()
     {
-        return view('admin.dashboard');
+        $data = [
+            'countOfStudents' => User::where('isAdmin',false)->count(),
+            'lastGradeTime' => Jalalian::forge( Grade::orderBy('created_at', 'desc')->first()->created_at)->format('%Y/%m/%d  H:i'),
+            'numberOfRejected' => Grade::where("amount","<","10")->where("amount","<>",0)->count()
+        ];
+        return view('admin.dashboard', $data);
     }
     public function showNewSemester()
     {

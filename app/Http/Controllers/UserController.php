@@ -30,14 +30,42 @@ class UserController extends Controller
     }
     public function showDashboard()
     {
-        return view('dashboard');
+        $gradeOfStudent = Grade::where("student_id", auth()->id());
+        $gradeOfStudent = $gradeOfStudent
+            ->where(
+                "year",
+                $gradeOfStudent->orderBy("year", "desc")->first()->year
+            )
+            ->where(
+                "semester",
+                $gradeOfStudent->orderByDesc("year")->orderByDesc("semester")->first()->semester
+            );
+        $data = [
+            'countOfCourses' => Course::where(
+                'level',
+                Classroom::find(auth()->user()->classroom_id)->level
+            )
+                ->where(
+                    'field_id',
+                    Classroom::find(auth()->user()->classroom_id)->field_id
+                )
+                ->count(),
+            'countOfGrades' => $gradeOfStudent->count(),
+            'numberOfAccepted' => $gradeOfStudent->where("amount", ">=", "10")->count(),
+            // 'numberOfRejected' => $gradeOfStudent->where("amount", "<", "10")->where("amount", "<>", "0")->count(),
+            'firstGradeTime' => Jalalian::forge($gradeOfStudent->orderByDesc("created_at")->first()->created_at)->format("%A, %d/%m/%Y"),
+            'lastGradeTime' => Jalalian::forge($gradeOfStudent->orderBy("created_at")->first()->created_at)->format("%A, %d/%m/%Y")
+        ];
+        $data['numberOfRejected'] = intval($data['countOfGrades']) - intval($data['numberOfAccepted']);
+        // return $data;
+        return view('dashboard', $data);
     }
     public function showGradeReport()
     {
         $data = [];
         $userInfo = [];
         $gradeItem = Grade::where('student_id', auth()->id());
-        if(!$gradeItem->exists()){
+        if (!$gradeItem->exists()) {
             return redirect(route('dashboard'))->with('error', __("No grades have yet been made for you!"));
         }
         $lastYear = $gradeItem->orderBy('year', 'desc')->first()->year;
@@ -47,9 +75,9 @@ class UserController extends Controller
         $userInfo['level'] = $this->replaceNumbersWithWords(Classroom::find(auth()->user()->classroom_id)->level);
         $userInfo['semester'] = $this->replaceNumbersWithWords($lastSemester);
         $grades = Grade::where('student_id', auth()->id())
-                        ->where('year', $lastYear)
-                        ->where('semester', $lastSemester)
-                        ->get(['course_id', 'amount', 'updated_at']);
+            ->where('year', $lastYear)
+            ->where('semester', $lastSemester)
+            ->get(['course_id', 'amount', 'updated_at']);
         foreach ($grades as $key => $grade) {
             $course_title = Course::find($grade->course_id)->title;
             array_push($data, [
