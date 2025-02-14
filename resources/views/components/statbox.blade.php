@@ -11,7 +11,7 @@
 
 @endphp
 
-<div class="relative w-full max-w-[400px] min-h-[200px] rounded-2xl shadow overflow-hidden xl:w-1/4 bg-gradient-to-r {{ $boxColor }}">
+<div class="relative w-full mx-auto max-w-[400px] min-h-[200px] rounded-2xl shadow overflow-hidden xl:w-1/4 bg-gradient-to-r {{ $boxColor }}">
     <img src="/static/img/bokeh.png" class="absolute opacity-50 z-[1] top-0 left-0 w-full" alt="">
     <div class="w-full h-full relative z-[10] flex flex-col text-white p-5  items-center justify-center">
         <strong class="shadow-black drop-shadow my-3">{{$title}}</strong>
