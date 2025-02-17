@@ -9,3 +9,13 @@
 body{
     direction: rtl;
 }
+body *{
+    transition: all 0.15s ease;
+}
+
+#gray-box:hover .book-stack img{
+    margin-right: 0.5rem;
+}
+#gray-box .book-stack img{
+    margin-right: -1rem;
+}
