@@ -17,6 +17,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/gradeReportView', [UserController::class,'showGradeReport'])->name('grade_report_view');
 });
 Route::middleware('auth')->group(function () {
+    Route::prefix("/api")->group(function (){
+        Route::get("/studentAndAverageGrades", [GradeController::class, 'getStudentAndAverageGrades']);
+    });
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -37,6 +40,7 @@ Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function ()
     });
     Route::prefix("/api")->group(function (){
         Route::post("/getCourses/{id}", [CourseController::class,'coursesOfClassroom']);
+        Route::get("/studentAndAverageGrades", [GradeController::class, 'getStudentAndAverageGrades']);
     });
 });
 

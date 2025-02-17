@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
+use App\Models\Course;
 use App\Models\Grade;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Morilog\Jalali\Jalalian;
 use Validator;
 
 class GradeController extends Controller
@@ -25,17 +28,17 @@ class GradeController extends Controller
         if ($validation->fails()) {
             return redirect(route('grades_input'))->withInput()->withErrors($validation->errors());
         }
-        $grades = $request->get('student');
+        $studentGrades = $request->get('student');
         $year = intval($request->get('semester_year'));
         $semester = intval($request->get('semester_part'));
         $course_id = intval($request->get('course_id'));
         $classroom_id = intval($request->get('classroom_id'));
-        foreach ($grades as $student_id => $amount) {
+        foreach ($studentGrades as $student_id => $amount) {
             $searchGrade = Grade::where("student_id", $student_id)
                 ->where("course_id", $course_id)
                 ->where("semester", $semester)
                 ->where("year", $year)
-                ;
+            ;
             if (!$searchGrade->exists()) {
                 $grade = new Grade();
                 $grade->student_id = intval($student_id);
@@ -59,6 +62,38 @@ class GradeController extends Controller
             'semester_part' => $semester,
             'classroom_id' => $classroom_id,
         ]))
-        ->with("status", __('Scores were successfully recorded!'));
+            ->with("status", __('Scores were successfully recorded!'));
+    }
+
+    public function getStudentAndAverageGrades()
+    {
+        $data = [
+            'labels' => [],
+            'studentGrades' => [],
+            'averageGrades' => []
+        ];
+        $gradeItem = Grade::where('student_id', auth()->id());
+        if (!$gradeItem->exists()) {
+            return redirect(route('dashboard'))->with('error', __("No grades have yet been made for you!"));
+        }
+        $lastYear = $gradeItem->orderBy('year', 'desc')->first()->year;
+        $lastSemester = $gradeItem->orderBy('semester', 'desc')->first()->semester;
+
+        $grades = Grade::where('student_id', auth()->id())
+            ->where('year', $lastYear)
+            ->where('semester', $lastSemester)
+            ->get(['course_id', 'amount']);
+
+        foreach ($grades as $key => $grade) {
+            $course_title = Course::find($grade->course_id)->title;
+            $averageGrade = Grade::where('course_id', $grade->course_id)
+                ->where('amount', '<>', '0')
+                ->avg('amount');
+            array_push($data['labels'], $course_title);
+            array_push($data['studentGrades'], floatval($grade->amount));
+            array_push($data['averageGrades'], floatval($averageGrade));
+        }
+
+        return $data;
     }
 }
