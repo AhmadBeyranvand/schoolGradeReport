@@ -16,8 +16,9 @@
     <div class="w-full xl:p-10 md:p-8 p-3">
         <div class="flex w-full bg-[#f4f6fa] dark:bg-neutral-800 rounded-3xl">
             <main class="flex flex-col xl:w-3/4 border-l p-10">
+                @include('layouts.navigation')
                 {{  $slot  }}
-                
+
             </main>
             <aside>
                 <div id="chartdiv" class="w-96 h-80 bg-red-100"></div>

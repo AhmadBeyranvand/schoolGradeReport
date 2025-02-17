@@ -1,5 +1,5 @@
 <x-app-layout>
-    @include('layouts.navigation')
+    
     <section class="flex xl:flex-row flex-col gap-6 justify-start pt-10">
         <div id="profile"
             class="bg-white dark:bg-neutral-700 rounded-3xl p-10 2xl:w-1/3 w-full shadow-xl flex flex-col justify-center">
@@ -9,7 +9,7 @@
             <legend class="text-center text-xl">{{ auth()->user()->first_name }}
                 {{ auth()->user()->last_name }}
             </legend>
-            <p class="text-center my-5">دانش آموز پایه دهم</p>
+            <p class="text-center my-5">دانش آموز پایه </p>
             <div class="flex 2xl:flex-row flex-col gap-3 items-center justify-around">
                 <div class="p-1 rounded-full text-xs bg-white dark:bg-gray-900 shadow-xl flex items-center">
                     <img src="/static/icons/users_small.png" class="w-[12px] mx-1" alt="">
@@ -19,7 +19,7 @@
                 <div class="p-1 rounded-full text-xs bg-white dark:bg-gray-900 shadow-xl flex items-center">
                     <img src="/static/icons/book_small.png" class="w-[12px] mx-1" alt="">
                     <p>تعداد درس‌ها:</p>
-                    <strong class="mx-2">{{24}} عنوان</strong>
+                    <strong class="mx-2">{{$countOfCourses}} عنوان</strong>
                 </div>
             </div>
         </div>
