@@ -11,17 +11,20 @@ axios.get("/api/studentAndAverageGrades")
         data: {
           labels: data.labels,
           datasets: [{
-            label: 'نمرات شما',
+            label: 'نمره‌ی شما',
             borderRadius: 20,
-            borderColor: 'rgb(74, 74, 74)',
+            borderColor: 'gray',
             data: data.studentGrades,
-            borderWidth: 2
+            borderWidth: 2,
+            pointBackgroundColor: 'white', 
+            pointBorderWidth:3
           }, {
             label: 'میانگین نمرات کلاس',
             borderRadius: 20,
             borderColor: 'rgb(0, 187, 255)',
             data: data.averageGrades,
-            borderWidth: 2
+            borderWidth: 2,
+            pointBorderWidth:3
           }]
         },
         options: {

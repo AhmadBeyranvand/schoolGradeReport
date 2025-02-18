@@ -27,7 +27,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a 
-                        href="#logout" 
+                        href="/logout" 
                         onclick="event.preventDefault(); this.closest('form').submit();"
                         class="flex gap-2 py-3 px-3 bg-red-100 text-red-700 hover:bg-red-200">
                         <img src="/static/icons/logout.svg" class="w-6 fill-red-100" alt="">

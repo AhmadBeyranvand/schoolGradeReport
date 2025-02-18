@@ -24,7 +24,7 @@
     </style>
 </head>
 
-<body class="relative">
+<body>
     <main class="w-full min-h-screen bg-cover flex lg:flex-row flex-col"
         style="background: url('/static/img/school.webp') no-repeat center center;">
         <div x-transition
@@ -37,10 +37,10 @@
             </div>
         </div>
         <div
-            class="xl:w-3/12 lg:min-h-screen min-h-[50vh] w-full p-12 bg-white flex flex-col justify-center items-center">
+            class="xl:w-3/12 lg:min-h-screen min-h-[50vh] w-full p-12 bg-white dark:bg-gray-800 flex flex-col justify-center items-center">
             {{ $slot }}
         </div>
-        <div class="md:hidden flex justify-center bg-white absolute bottom-5 w-[98%] left-0 right-0 mx-auto p-3 ">
+        <div class="md:hidden flex justify-center bg-white absolute bottom-0 w-[98%] left-0 right-0 mx-auto p-3 ">
             طراحی شده در استودیوی طراحی
             <a class="text-purple-600 mx-1" href="https://havirweb.ir">هاویر وب</a>
             ™

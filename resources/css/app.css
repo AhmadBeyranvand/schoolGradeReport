@@ -19,3 +19,6 @@ body *{
 #gray-box .book-stack img{
     margin-right: -1rem;
 }
+.return-btn:hover img{
+    filter: invert(1);
+}
