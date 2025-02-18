@@ -23,6 +23,7 @@
         "@vfx-js/core": "^0.6.0",
         "chart.js": "^4.4.7",
         "datatables.net-dt": "^2.2.1",
-        "datatables.net-plugins": "^2.2.1"
+        "datatables.net-plugins": "^2.2.1",
+        "toastify-js": "^1.12.0"
     }
 }

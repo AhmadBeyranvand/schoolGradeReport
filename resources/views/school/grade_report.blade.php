@@ -1,11 +1,8 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Grade report view') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
+    <main class="flex flex-col w-full border-l md:p-10 p-3">
+        @include('layouts.navigation')
+        @include('components.return')
+    <div class="py-12 max-w-7xl">
         <div class="bg-white dark:bg-gray-800 shadow rounded-xl">
             <div
                 class="flex md:flex-row flex-col max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-gray-200">
