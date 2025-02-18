@@ -1,9 +1,6 @@
 <x-app-layout>
-	<x-slot name="header">
-		<h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-			{{ __('Student manager') }}
-		</h2>
-	</x-slot>
+    <main class="flex flex-col xl:w-3/4 lg:w-3/5 w-full border-l md:p-10 p-3">
+        @include('layouts.navigation')
 
 	<div class="py-12">
 		<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -143,4 +140,5 @@
 			</div>
 		</div>
 	</div>
+	</main>
 </x-app-layout>
