@@ -80,6 +80,7 @@ class GradeController extends Controller
         $lastSemester = $gradeItem->orderBy('semester', 'desc')->first()->semester;
 
         $grades = Grade::where('student_id', auth()->id())
+            ->where('amount', '<>', '0')
             ->where('year', $lastYear)
             ->where('semester', $lastSemester)
             ->get(['course_id', 'amount']);

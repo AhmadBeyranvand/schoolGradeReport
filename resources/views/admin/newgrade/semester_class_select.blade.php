@@ -1,25 +1,26 @@
 <x-app-layout>
-	<main class="flex flex-col xl:w-3/4 lg:w-3/5 w-full border-l md:p-10 p-3">
+	<main class="flex flex-col w-full  md:p-10 p-3">
 		@include('layouts.navigation')
-
+		@include('components.return', ['custom_route'=>route('admin_dashboard')])
+		
 		<div class="py-12" x-data="{ year: {{$year}}, course_id:0 }">
 			<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-				<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+				<div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-lg">
 					<div class="p-6 text-gray-900 dark:text-gray-100 ">
 						<form action={{route("grades_input")}}
-							class="mx-auto w-full bg-white dark:bg-gray-900 w-full mb-3 rounded-lg p-3 flex md:gap-8 gap-6 items-end md:my-5 my-8 flex md:flex-row flex-col justify-center md:items-end items-center"
+							class="mx-auto w-full bg-white dark:bg-neutral-900 w-full mb-3 rounded-lg p-3 flex md:gap-8 gap-6 items-end md:my-5 my-8 flex md:flex-row flex-col justify-center md:items-end items-center"
 							method="get">
 							<input type="hidden" name="course_id" x-model="course_id">
 							<div class="flex flex-col">
 								<label for="semester_year">{{__("Semester Year")}}</label>
 								<input required name="semester_year" id="semester_year" value={{$year}} x-model="year"
-									class="dark:bg-gray-800 rounded-lg py-1 md:w-32 w-24 border-gray-200" type="number"
+									class="dark:bg-neutral-800 rounded-lg py-1 md:w-32 w-24 border-gray-200" type="number"
 									min="1403" max="1500" />
 							</div>
 
 							<div class="flex flex-col ">
 								<label for="semester_part">ترم تحصیلی</label>
-								<select required class="dark:bg-gray-800 rounded-lg py-1  border-gray-200"
+								<select required class="dark:bg-neutral-800 rounded-lg py-1  border-gray-200"
 									name="semester_part" id="semester_part">
 									<option value="1">ترم اول</option>
 									<option value="2">ترم دوم</option>
@@ -29,7 +30,7 @@
 							<div class="flex flex-col ">
 								<label for="classrooms">کلاس</label>
 								<select required id="classroom_id" name="classroom_id" onchange="getCourse()"
-									class=" dark:bg-gray-800 rounded-lg py-1 border-gray-200">
+									class=" dark:bg-neutral-800 rounded-lg py-1 border-gray-200">
 									<option value="0" disabled selected>لطفا یک گزینه را انتخاب کنید</option>
 									@foreach ($classrooms as $c)
 										<option value={{$c->id}}>{{$c->title}}</option>
@@ -48,7 +49,7 @@
 						<div id="booksContainer" class="min-h-[60vh] w-full flex justify-center items-center flex-wrap">
 							<div class="" id="no-book">
 								<canvas id="lottie-book" style="width: 600px;"></canvas>
-								<legend class="md:text-2xl text-sm text-center text-[#264984] mt-3 font-thin">لطفا
+								<legend class="md:text-2xl text-sm text-center text-[#264984] dark:text-white mt-3 font-thin">لطفا
 									مشخصات
 									ترم و سال و کلاس را انتخاب کنید</legend>
 							</div>
@@ -67,8 +68,8 @@
 								const title = book.title
 								const id = book.id
 								const bookElement = document.createElement("div")
-								bookElement.classList.add('flex', 'w-[160px]', 'flex-col', 'justify-center', 'p-3', 'm-3', 'cursor-pointer', 'dark:bg-gray-900', 'border', 'border-gray-200', 'dark:border-gray-600', 'rounded-xl')
-								bookElement.setAttribute("x-bind:class", " course_id == " + id + " ? 'bg-blue-400 dark:bg-blue-500 bg-opacity-50' : ''")
+								bookElement.classList.add('flex', 'w-[160px]', 'flex-col', 'justify-center', 'p-3', 'm-3', 'cursor-pointer', 'border', 'border-gray-200', 'dark:border-gray-600', 'rounded-xl')
+								bookElement.setAttribute("x-bind:class", " course_id == " + id + " ? 'bg-blue-400  bg-opacity-50' : ''")
 								bookElement.setAttribute("x-on:click", " course_id = " + id)
 								bookElement.setAttribute("x-transition", "")
 								const bookImg = document.createElement("img")

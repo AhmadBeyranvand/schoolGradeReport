@@ -65,6 +65,7 @@ class UserController extends Controller
                     ),
                 ]);
             }
+            return $gradeStatus;
             $data = [
                 'level' => $this->replaceNumbersWithWords(Classroom::find(auth()->user()->classroom_id)->level),
                 'countOfClassmates' => User::where("classroom_id", auth()->user()->classroom_id)->count() - 1,
@@ -104,6 +105,7 @@ class UserController extends Controller
         $userInfo['level'] = $this->replaceNumbersWithWords(intval(Classroom::find(auth()->user()->classroom_id)->level));
         $userInfo['semester'] = $this->replaceNumbersWithWords($lastSemester);
         $grades = Grade::where('student_id', auth()->id())
+            ->where('amount', '<>', '0')
             ->where('year', $lastYear)
             ->where('semester', $lastSemester)
             ->get(['course_id', 'amount', 'updated_at']);

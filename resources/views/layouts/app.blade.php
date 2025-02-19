@@ -27,12 +27,7 @@
         <div class="toast"> {{ session('error') }} </div>
     @endif
     @if($errors->any())
-        {!! implode('', $errors->all('
-            <div class="bg-red-100 my-2 rounded-lg p-4 text-red-800 flex" x-show="open" x-on:click="open = false">
-                        :message
-                        <span class="px-3 py-1 cursor-pointer text-sm mr-auto bg-red-800 text-red-100 rounded">بستن</span>
-                    </div>
-        ')) !!}
+        {!! implode('', $errors->all(' <div class="toast"> :message </div> ')) !!}
     @endif
 
 </body>

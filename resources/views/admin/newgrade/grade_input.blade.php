@@ -1,18 +1,11 @@
 <x-app-layout>
-    <main class="flex flex-col xl:w-3/4 lg:w-3/5 w-full border-l md:p-10 p-3">
+    <main class="flex flex-col w-full border-l md:p-10 p-3">
         @include('layouts.navigation')
-
+		@include('components.return', ['custom_route'=>route('new_semester_grade')])
 	<div class="py-12">
 		<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-			<div
-				class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100 w-full">
+			<div class="bg-white dark:bg-neutral-800 overflow-hidden shadow-sm sm:rounded-2xl p-6 text-gray-900 dark:text-gray-100 w-full">
 
-				<div
-					class="mx-auto w-full bg-white dark:bg-gray-900 w-full mb-3 rounded-lg p-3 flex md:flex-row flex-col items-end w-full justify-between">
-					<a class="bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 py-2 px-3 text-sm rounded-lg"
-						href="{{route('new_semester_grade')}}">بازگشت به انتخاب سال و ترم تحصیلی</a>
-
-				</div>
 				<div class=" min-h-[60vh] w-full flex justify-center items-center">
 					<form action="{{route('submit_grades')}}" class="w-full" method="post">
 						<input type="hidden" name="course_id" value="{{$course_id}}">
@@ -41,7 +34,7 @@
 										<td>{{$st->father_name}}</td>
 										<td>
 											<input
-												class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-lg rounded"
+												class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-neutral-700 dark:text-gray-50 w-20 xl:rounded-lg rounded"
 												value={{$st['grade']}} min="0" step="0.01" max="20" type="number"
 												name="student[{{$st->id}}]">
 										</td>
@@ -66,7 +59,7 @@
 							</thead>
 							<tbody>
 								@foreach ($students as $st)
-								<tr class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600">
+								<tr class="bg-neutral-50 dark:bg-neutral-900 border border-gray-200 dark:border-gray-600">
 									<td class="border-b border-gray-200 dark:border-gray-600" data-label="کد ملی">
 										{{$st->national_code}}
 									</td>
@@ -81,7 +74,7 @@
 									</td>
 									<td class="border-b border-gray-200 dark:border-gray-600" data-label="نمره">
 										<input
-											class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-50 w-20 xl:rounded-lg rounded"
+											class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-neutral-700 dark:text-gray-50 w-20 xl:rounded-lg rounded"
 											value={{$st['grade']}} min="0" step="0.01" max="20" type="number" name="student[{{$st->id}}]">
 									</td>
 									<td class="border-b border-gray-200 dark:border-gray-600" data-label="عملیات">
