@@ -10,7 +10,7 @@ if(document.getElementById('adminChart')){
         new Chart(ctx, {
           type: 'line',
           data: {
-            labels: data.labels,
+            labels: data.titles,
             datasets: [{
               label: 'میانگین نمرات',
               borderRadius: 20,
