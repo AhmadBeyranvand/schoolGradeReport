@@ -65,7 +65,7 @@ class UserController extends Controller
                     ),
                 ]);
             }
-            return $gradeStatus;
+            // return $gradeStatus;
             $data = [
                 'level' => $this->replaceNumbersWithWords(Classroom::find(auth()->user()->classroom_id)->level),
                 'countOfClassmates' => User::where("classroom_id", auth()->user()->classroom_id)->count() - 1,

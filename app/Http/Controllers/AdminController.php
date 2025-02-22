@@ -6,6 +6,7 @@ use App\Models\Classroom;
 use App\Models\Course;
 use App\Models\Grade;
 use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
 use Morilog\Jalali\Jalalian;
 use Validator;
@@ -18,14 +19,17 @@ class AdminController extends Controller
     }
     public function showDashboard()
     {
-        $noData = (Grade::all()->count() > 0) ? false : true;
+        $noData = (Grade::where('amount', '<>', 0)->count() > 0) ? false : true;
         $data = [
             'countOfStudents' => User::where('isAdmin', false)->count(),
+            'countOfCourses' => Course::count(),
             'lastGradeTime' => $noData ? "بدون نمره" : Jalalian::forge(Grade::orderBy('created_at', 'desc')->first()->created_at)->format('%Y/%m/%d  H:i'),
-            'numberOfRejected' => $noData ? "0" : Grade::where("amount", "<", "10")->where("amount", "<>", 0)->count()
+            'numberOfRejected' => $noData ? "0" : Grade::where("amount", "<", "10")->where("amount", "<>", 0)->count(),
+            'averageGrades' => []
         ];
         return view('admin.dashboard', $data);
     }
+
     public function showNewSemester()
     {
         $classrooms = Classroom::orderBy('level')->get();
@@ -109,7 +113,7 @@ class AdminController extends Controller
             "first_name" => ['required'],
             "last_name" => ['required'],
             "father_name" => ['required'],
-            "national_code" => ['required',Rule::unique('users')->ignore($id)],
+            "national_code" => ['required', Rule::unique('users')->ignore($id)],
             "email" => ['required', 'email', Rule::unique('users')->ignore($id)],
             "phone" => ['required', Rule::unique('users')->ignore($id)],
             "password" => ['nullable', 'min:8'],

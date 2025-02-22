@@ -41,6 +41,7 @@ Route::prefix('/admin')->middleware(['auth', IsAdmin::class])->group(function ()
     Route::prefix("/api")->group(function (){
         Route::post("/getCourses/{id}", [CourseController::class,'coursesOfClassroom']);
         Route::get("/studentAndAverageGrades", [GradeController::class, 'getStudentAndAverageGrades']);
+        Route::get("/getAverageOfCourses", [CourseController::class, 'getAvergaeOfCourses']);
     });
 });
 
