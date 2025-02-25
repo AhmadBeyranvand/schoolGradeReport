@@ -3,11 +3,11 @@
         @include('layouts.navigation')
         @include('components.return')
     <div class="py-12 max-w-7xl">
-        <div class="bg-white dark:bg-gray-800 shadow rounded-xl">
+        <div class="bg-white dark:bg-neutral-800 shadow rounded-xl">
             <div
-                class="flex md:flex-row flex-col max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-gray-200">
+                class="flex md:flex-row flex-col max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-neutral-800 dark:text-neutral-200">
                 <div
-                    class="xl:w-1/4 p-3 md:border-l border-l-none border-gray-200 lg:w-1/3 md:w-1/2 w-full flex flex-col items-center">
+                    class="xl:w-1/4 p-3 md:border-l border-l-none border-neutral-200 lg:w-1/3 md:w-1/2 w-full flex flex-col items-center">
                     <img class="filter grayscale hover:filter-none" src="/static/img/user.svg" width="120" alt="">
                     <div class="flex gap-3 justify-start w-full p-2">
                         <p>نام:</p>
@@ -41,8 +41,8 @@
                 <div class="xl:w-3/4 p-3 lg:w-2/3 md:w-1/2 w-full">
 
                     <div class="relative overflow-x-auto xl:w-10/12 border rounded-xl   ">
-                        <table class="w-full rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full rtl:text-right text-neutral-500 dark:text-neutral-400">
+                            <thead class="text-neutral-700 uppercase bg-neutral-50 dark:bg-neutral-700 dark:text-neutral-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center">
                                         نام درس
@@ -57,11 +57,11 @@
                             </thead>
                             <tbody>
                                 <!-- To be repeated -->
-                                @foreach ($grades as $grade)
+                                @foreach ($data['grades'] as $grade)
                                     <tr
-                                        class="bg-white hover:bg-gray-100 hover:dark:bg-gray-800 border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                        class="bg-white hover:bg-neutral-100 hover:dark:bg-neutral-800 border-b dark:bg-neutral-800 dark:border-neutral-700 border-neutral-200">
                                         <td scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center dark:text-white">
+                                            class="px-6 py-4 font-medium text-neutral-900 whitespace-nowrap text-center dark:text-white">
                                             {{$grade['title']}}
                                         </td>
                                         <td class="px-6 py-4 text-center">
@@ -72,10 +72,11 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
+                        <legend class="text-2xl py-6 text-center">معدل کل: {{ $data['avg'] }}</legend>
                     </div>
+
 
                 </div>
             </div>

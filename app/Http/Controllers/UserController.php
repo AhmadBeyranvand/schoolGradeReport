@@ -90,7 +90,10 @@ class UserController extends Controller
     }
     public function showGradeReport()
     {
-        $data = [];
+        $data = [
+            'grades' => [],
+            'avg' => 0
+        ];
         $userInfo = [];
         $gradeItem = Grade::where('student_id', auth()->id())
             ->where('amount', '<>', 0);
@@ -109,16 +112,21 @@ class UserController extends Controller
             ->where('year', $lastYear)
             ->where('semester', $lastSemester)
             ->get(['course_id', 'amount', 'updated_at']);
+        $sum = 0;
+        $count = 0;
         foreach ($grades as $key => $grade) {
-            $course_title = Course::find($grade->course_id)->title;
-            array_push($data, [
-                'title' => $course_title,
+            $course = Course::find($grade->course_id);
+            $sum += floatval($grade->amount) * intval($course->unit);
+            $count += intval($course->unit);
+            array_push($data['grades'], [
+                'title' => $course->title,
                 'amount' => floatval($grade->amount),
                 'time' => Jalalian::forge($grade->updated_at)->format('%A, %d %B %Y')
             ]);
         }
+        $data['avg'] = $sum / $count;
         // return $data;
-        return view('school.grade_report', ["grades" => $data, "userInfo" => $userInfo]);
+        return view('school.grade_report', ["data" => $data, "userInfo" => $userInfo]);
     }
 
     public function rootPage()
