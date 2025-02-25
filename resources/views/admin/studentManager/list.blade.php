@@ -1,7 +1,7 @@
 <x-app-layout>
 	<main class="flex flex-col w-full md:p-10 p-3">
 		@include('layouts.navigation')
-		@include('components.return')
+		@include('components.return', ['custom_route'=>route('admin_dashboard')])
 		<div class="py-12">
 			<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 				<div

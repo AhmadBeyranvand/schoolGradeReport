@@ -1,7 +1,7 @@
 <header class="flex w-full justify-between" x-data="{ open: false }">
     <div class="md:hidden flex">
         <button x-on:click="open = ! open">
-            <img class="w-8 mr-3" src="/static/icons/menu.svg" alt="">
+            <img class="w-8 mr-3 dark:invert" src="/static/icons/menu.svg" alt="">
         </button>
         <div x-transition class="fixed top-0 right-0 backdrop-blur-xl w-full h-full z-[9999] flex flex-col p-3"
             x-show="open" x-cloak style="display: none;">
