@@ -22,7 +22,6 @@
 										<th>نام خانوادگی</th>
 										<th>نام پدر</th>
 										<th>نمره</th>
-										<th>عملیات</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -38,9 +37,6 @@
 												value={{$st['grade']}} min="0" step="0.01" max="20" type="number"
 												name="student[{{$st->id}}]">
 										</td>
-										<td>
-											<button type="submit" tabindex="-1">تاریخچه</button>
-										</td>
 									</tr>
 									@endforeach
 								</tbody>
@@ -54,7 +50,6 @@
 									<th scope="col">نام خانوادگی</th>
 									<th scope="col">نام پدر</th>
 									<th scope="col">نمره</th>
-									<th scope="col">عملیات</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -76,9 +71,6 @@
 										<input
 											class="border-gray-200 dark:border-gray-600 p-1 bg-white text-gray-800 dark:bg-neutral-700 dark:text-gray-50 w-20 xl:rounded-lg rounded"
 											value={{$st['grade']}} min="0" step="0.01" max="20" type="number" name="student[{{$st->id}}]">
-									</td>
-									<td class="border-b border-gray-200 dark:border-gray-600" data-label="عملیات">
-										<p> lorem </p>
 									</td>
 								</tr>
 								@endforeach
