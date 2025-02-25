@@ -40,7 +40,7 @@
             class="xl:w-3/12 lg:min-h-screen min-h-[50vh] w-full p-12 bg-white dark:bg-gray-800 flex flex-col justify-center items-center">
             {{ $slot }}
         </div>
-        <div class="md:hidden flex justify-center bg-white  w-[98%] left-0 right-0 mx-auto p-3 ">
+        <div class="md:hidden flex justify-center bg-white  w-full left-0 right-0 mx-auto p-3 ">
             طراحی شده در استودیوی طراحی
             <a class="text-purple-600 mx-1" href="https://havirweb.ir">هاویر وب</a>
             ™
