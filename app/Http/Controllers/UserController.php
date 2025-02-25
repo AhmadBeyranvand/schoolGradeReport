@@ -38,8 +38,8 @@ class UserController extends Controller
             'countOfGrades' => 0
         ];
         if (!$noData) {
-            $lastYear = $gradeOfStudent->orderBy("year", "desc")->first()->year;
-            $lastSemester = $gradeOfStudent->orderByDesc("year")->orderByDesc("semester")->first()->semester;
+            $lastYear = $gradeOfStudent->orderBy("year", "desc")->get("year")[0]['year'];
+            $lastSemester = $gradeOfStudent->orderByDesc("year")->orderByDesc("semester")->get('semester')[0]['semester'];
             $gradeOfStudent = $gradeOfStudent
                 ->where(
                     "year",
@@ -50,6 +50,7 @@ class UserController extends Controller
                     $lastSemester
                 );
             $gradeStatus = [];
+            // return $gradeOfStudent->get();
             foreach ($gradeOfStudent->get(['course_id', 'amount']) as $grd) {
                 array_push($gradeStatus, [
                     'course_id' => $grd->course_id,
@@ -65,7 +66,6 @@ class UserController extends Controller
                     ),
                 ]);
             }
-            // return $gradeStatus;
             $data = [
                 'level' => $this->replaceNumbersWithWords(Classroom::find(auth()->user()->classroom_id)->level),
                 'countOfClassmates' => User::where("classroom_id", auth()->user()->classroom_id)->count() - 1,
