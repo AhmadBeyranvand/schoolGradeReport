@@ -1,6 +1,6 @@
 <header class="flex w-full justify-between" x-data="{ open: false }">
     <div id="right" class="flex justify-start">
-        <a href="{{route('dashboard')}}"><img class="h-[72px]" src="/static/img/logo_color.svg" alt=""> </a>
+        <a href="/"><img class="h-[72px]" src="/static/img/logo_color.svg" alt=""> </a>
         <div class="flex flex-col justify-around items-start mr-4">
             <h1 class="text-2xl ">{{config("app.name")}}</h1>
             <legend class="text-gray-500">{{ auth()->user()->first_name }} جان، به وبسایت مدرسه خوش

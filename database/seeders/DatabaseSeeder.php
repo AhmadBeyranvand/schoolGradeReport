@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ClassroomSeeder::class);
         $this->call(StudentsSeeder::class);
         User::factory()->create([
-            'first_name' => 'نوشین',
-            'last_name' => 'خورزمان',
-            'name' => 'نوشین خورزمان',
+            'first_name' => 'کاربر',
+            'last_name' => 'تست',
+            'name' => 'کاربر تست',
             'isAdmin' => true,
             'email' => 'test@admin.com',
             'password' => Hash::make("12345678")
