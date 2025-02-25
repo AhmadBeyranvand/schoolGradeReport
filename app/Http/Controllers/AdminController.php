@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classroom;
 use App\Models\Course;
+use App\Models\Field;
 use App\Models\Grade;
 use App\Models\User;
 use DB;
@@ -20,12 +21,29 @@ class AdminController extends Controller
     public function showDashboard()
     {
         $noData = (Grade::where('amount', '<>', 0)->count() > 0) ? false : true;
+        $classroomData = [];
+        foreach (Classroom::all() as $cl) {
+            $studentsOfClassroom = User::where('classroom_id', $cl->id);
+            array_push(
+                $classroomData,
+                [
+                    'id' => $cl->id,
+                    'count' => $studentsOfClassroom->count(),
+                    'level' => $cl->level,
+                    'field' => Field::find($cl->field_id)->title,
+                    'avg' => Grade::whereIn('student_id', $studentsOfClassroom->pluck('id'))
+                        ->where('amount','<>',0)
+                        ->avg('amount')
+                ]
+            );
+        }
         $data = [
             'countOfStudents' => User::where('isAdmin', false)->count(),
             'countOfCourses' => Course::count(),
             'lastGradeTime' => $noData ? "بدون نمره" : Jalalian::forge(Grade::orderBy('created_at', 'desc')->first()->created_at)->format('%Y/%m/%d  H:i'),
             'numberOfRejected' => $noData ? "0" : Grade::where("amount", "<", "10")->where("amount", "<>", 0)->count(),
-            'averageGrades' => []
+            'averageGrades' => [],
+            'classroomStats' => $classroomData
         ];
         return view('admin.dashboard', $data);
     }

@@ -64,4 +64,5 @@
             <canvas class="z-10 relative md:w-4/5 w-full mx-auto" id="adminChart"></canvas>
         </section>
     </main>
+    @include('layouts.sidebar')
 </x-app-layout>
