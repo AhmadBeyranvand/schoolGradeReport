@@ -1,81 +1,82 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Grade report view') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="bg-white dark:bg-gray-800 shadow">
+    <main class="flex flex-col w-full border-l md:p-10 p-3">
+        @include('layouts.navigation')
+        @include('components.return')
+    <div class="py-12 max-w-7xl">
+        <div class="bg-white dark:bg-neutral-800 shadow rounded-xl">
             <div
-                class="flex md:flex-row flex-col max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-gray-800 dark:text-gray-200">
-                <div class="xl:w-1/4 p-3 md:border-l border-l-none border-gray-200 lg:w-1/3 md:w-1/2 w-full flex flex-col items-center">
+                class="flex md:flex-row flex-col max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-neutral-800 dark:text-neutral-200">
+                <div
+                    class="xl:w-1/4 p-3 md:border-l border-l-none border-neutral-200 lg:w-1/3 md:w-1/2 w-full flex flex-col items-center">
                     <img class="filter grayscale hover:filter-none" src="/static/img/user.svg" width="120" alt="">
                     <div class="flex gap-3 justify-start w-full p-2">
                         <p>نام:</p>
-                        <strong>علی</strong>
+                        <strong>{{auth()->user()->first_name}}</strong>
                     </div>
                     <div class="flex gap-3 justify-start w-full p-2">
                         <p>نام خانوادگی:</p>
-                        <strong>امیری</strong>
+                        <strong>{{auth()->user()->last_name}}</strong>
                     </div>
                     <div class="flex gap-3 justify-start w-full p-2">
                         <p>نام پدر:</p>
-                        <strong>ابوطالب</strong>
+                        <strong>{{auth()->user()->father_name}}</strong>
                     </div>
                     <div class="flex gap-3 justify-start w-full p-2">
                         <p>کدملی:</p>
-                        <strong>4120000110</strong>
+                        <strong>{{auth()->user()->national_code}}</strong>
                     </div>
                     <div class="flex gap-3 justify-start w-full p-2">
-                        <p>پایه:</p>
-                        <strong>110</strong>
+                        <p>نام کلاس:</p>
+                        <strong>{{auth()->user()->classroom_id}}</strong>
                     </div>
                     <div class="flex gap-3 justify-start w-full p-2">
-                        <p>رشته تحصیلی:</p>
-                        <strong>علوم تجربی</strong>
+                        <p> پایه :</p>
+                        <strong>{{ $userInfo['level'] }}</strong>
                     </div>
                     <div class="flex gap-3 justify-start w-full p-2">
                         <p>ترم تحصیلی:</p>
-                        <strong>دوم 1403-1404</strong>
+                        <strong>ترم {{ $userInfo['semester'] }} سال  {{$userInfo['year']}}-{{$userInfo['year']+1}}</strong>
                     </div>
                 </div>
                 <div class="xl:w-3/4 p-3 lg:w-2/3 md:w-1/2 w-full">
 
                     <div class="relative overflow-x-auto xl:w-10/12 border rounded-xl   ">
-                        <table class="w-full rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead
-                                class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full rtl:text-right text-neutral-500 dark:text-neutral-400">
+                            <thead class="text-neutral-700 uppercase bg-neutral-50 dark:bg-neutral-700 dark:text-neutral-400">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         نام درس
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         نمره
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         تاریخ ثبت
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- To be repeated -->
-
-                                <tr class="bg-white hover:bg-gray-100 hover:dark:bg-gray-800 border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center dark:text-white">
-                                        منطق
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        20
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        1403/05/12  --  12:00:43
-                                    </td>
-                                </tr>
-
+                                @foreach ($data['grades'] as $grade)
+                                    <tr
+                                        class="bg-white hover:bg-neutral-100 hover:dark:bg-neutral-800 border-b dark:bg-neutral-800 dark:border-neutral-700 border-neutral-200">
+                                        <td scope="row"
+                                            class="px-6 py-4 font-medium text-neutral-900 whitespace-nowrap text-center dark:text-white">
+                                            {{$grade['title']}}
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            {{$grade['amount']}}
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            {{$grade['time']}}
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        <legend class="text-2xl py-6 text-center">معدل کل: {{ $data['avg'] }}</legend>
                     </div>
+
 
                 </div>
             </div>

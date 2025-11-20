@@ -15,17 +15,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
+        $this->call(FieldsSeeder::class);
+        $this->call(CourseSeeder::class);
+        $this->call(ClassroomSeeder::class);
+        $this->call(StudentsSeeder::class);
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => Hash::make("12345678")
-        ]);
-        User::factory()->create([
-            'name' => 'Test Admin',
+            'first_name' => 'کاربر',
+            'last_name' => 'تست',
+            'name' => 'کاربر تست',
             'isAdmin' => true,
             'email' => 'test@admin.com',
             'password' => Hash::make("12345678")
         ]);
+
     }
 }

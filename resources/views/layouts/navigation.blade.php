@@ -1,108 +1,105 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="/">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('grade_report_view')" :active="request()->routeIs('grade_report_view')">
-                        {{ __('Grade report view') }}
-                    </x-nav-link>
-                </div>
-            </div>
-
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+<header class="flex w-full justify-between" x-data="{ open: false }">
+    <div class="md:hidden flex">
+        <button x-on:click="open = ! open">
+            <img class="w-8 mr-3 dark:invert" src="/static/icons/menu.svg" alt="">
+        </button>
+        <div x-transition class="fixed top-0 right-0 backdrop-blur-xl w-full h-full z-[9999] flex flex-col p-3"
+            x-show="open" x-cloak style="display: none;">
+            <button class="flex mb-3" x-on:click="open = ! open">
+                <img src="/static/icons/close.svg" class="w-6 dark:invert" alt="">
+                <p class="text-sm mr-3">بستن منو</p>
+            </button>
+            <div class="w-full bg-white shadow text-gray-900 p-3 rounded-2xl flex">
+                <img src="/static/img/user.jpg" class="w-24 rounded-full my-auto" alt="">
+                <div class="flex flex-col items-start m-2 justify-center w-full">
+                    <legend class="text-xl font-thin">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                    </legend>
+                    <div class="flex justify-between my-2 w-full">
+                        <a class="border border-gray-200 rounded-full p-3 text-center w-full hover:bg-gray-100 flex justify-center items-center"
+                            href="#">
+                            ویرایش پروفایل
+                        </a>
+                        <form action="/logout" method="post">
+                            {{ csrf_field() }}
+                            <button
+                                class="p-3 bg-red-50 hover:bg-red-200 border-2 border-red-500 text-red-500 rounded-full mr-2">
+                                <img src="/static/icons/logout.svg" class="w-12" alt="">
+                            </button>
                         </form>
-                    </x-slot>
-                </x-dropdown>
+                    </div>
+                </div>
             </div>
-
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+            <div class="w-full bg-white mt-3 shadow text-gray-900 p-3 rounded-2xl flex flex-col">
+                @if (auth()->check() && auth()->user()->isAdmin)
+                    <a href="{{ route('show_student_manager') }}"
+                        class="flex flex-col items-start py-2 px-4 justify-center w-full rounded-2xl hover:bg-gray-200">
+                        <div class="flex justify-start items-center my-2 w-full text-gray-700">
+                            <img src="/static/icons/listGray.svg" class="w-5 ml-3" alt="">
+                            {{ __('Student manager') }}
+                        </div>
+                    </a>
+                    <a href="{{ route('new_semester_grade') }}"
+                        class="flex flex-col items-start py-2 px-4 justify-center w-full rounded-2xl hover:bg-gray-200">
+                        <div class="flex justify-start items-center my-2 w-full text-gray-700">
+                            <img src="/static/icons/chartGray.svg" class="w-5 ml-3" alt="">
+                            {{ __('New semester grade input') }}
+                        </div>
+                    </a>
+                @else
+                    <a href="{{ route('grade_report_view') }}"
+                        class="flex flex-col items-start py-2 px-4 justify-center w-full rounded-2xl hover:bg-gray-200">
+                        <div class="flex justify-start items-center my-2 w-full text-gray-700">
+                            <img src="/static/icons/chartGray.svg" class="w-5 ml-3" alt="">
+                            {{ __('Grade report view') }}
+                        </div>
+                    </a>
+                @endif
             </div>
         </div>
     </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('grade_report_view')" :active="request()->routeIs('grade_report_view')">
-                {{ __('Grade report view') }}
-            </x-responsive-nav-link>
+    <div id="right" class="flex md:justify-start justify-center md:mx-0 mx-auto">
+        <a href="/"><img class="h-[72px]" src="/static/img/logo_color.svg" alt=""> </a>
+        <div class="flex flex-col justify-around items-start mr-4">
+            <h1 class="md:text-2xl text-lg">{{config("app.name")}}</h1>
+            <legend class="text-gray-500 md:text-base text-xs">{{ auth()->user()->first_name }} جان، به وبسایت مدرسه خوش
+                اومدین</legend>
         </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+    </div>
+    <div id="left" class="gap-6 items-center md:flex hidden">
+        @if (auth()->check() && auth()->user()->isAdmin)
+            <a href="{{ route('show_student_manager') }}"
+                class="bg-[#e2e3e8] dark:text-gray-800  hover:bg-gray-200 py-2 px-5 justify-center items-center rounded-full flex">
+                <img src="/static/icons/list.svg" class="h-[32px] ml-3" alt="">
+                <p>{{ __('Student manager') }}</p>
+            </a>
+        @else
+            <a href="{{ route('grade_report_view') }}"
+                class="bg-[#e2e3e8] dark:text-gray-800  hover:bg-gray-200 py-2 px-5 justify-center items-center rounded-full flex">
+                <img src="/static/icons/list.svg" class="h-[32px] ml-3" alt="">
+                <p>{{ __('Grade report view') }}</p>
+            </a>
+        @endif
+        <div class="relative">
+            <button @click="open = ! open"
+                class="bg-white relative z-10 shadow dark:text-gray-800 shadow-gray-100 dark:shadow-black hover:shadow-gray-200 dark:hover:shadow-gray-500 py-2 px-5 justify-center items-center rounded-full flex">
+                <img src="/static/icons/user.svg" class="h-[32px] ml-3" alt="">
+                <p>{{ auth()->user()->name }}</p>
+            </button>
+            <div x-show="open" id="profile" style="display: none;" x-transition
+                class="absolute w-full bg-white rounded-b-3xl overflow-hidden pt-7 -mt-7 z-0">
+                <a href="{{ route('profile.edit') }}" class="flex gap-2 py-3 px-3 bg-white hover:bg-gray-100">
+                    <img src="/static/icons/user.svg" class="w-6" alt="">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                    <a href="/logout" onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="flex gap-2 py-3 px-3 bg-red-100 text-red-700 hover:bg-red-200">
+                        <img src="/static/icons/logout.svg" class="w-6 fill-red-100" alt="">
                         {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                    </a>
                 </form>
             </div>
         </div>
     </div>
-</nav>
+</header>

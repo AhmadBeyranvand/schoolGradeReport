@@ -1,7 +1,91 @@
+@import "../../node_modules/datatables.net-dt/css/dataTables.dataTables.css";
+@import "../../node_modules/toastify-js/src/toastify.css";
+@import url('./mobileTable.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
+
+body {
     direction: rtl;
+}
+
+body * {
+    transition: all 0.15s ease;
+}
+
+#gray-box:hover .book-stack img {
+    margin-right: 0.5rem;
+}
+
+#gray-box .book-stack img {
+    margin-right: -1rem;
+}
+
+.return-btn:hover img {
+    filter: invert(1);
+}
+
+@media screen and (max-width:1536px) {
+    .stat * {
+        font-size: small !important;
+    }
+}
+
+.stat {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    border-radius: 1.5rem;
+    background: #f4f6fa;
+}
+
+.stat .title {
+    background-color: #cbcdda;
+    width: 100%;
+    border-radius: 1.5rem;
+    padding: 5px;
+    /* color: rgb(107 114 128); */
+    color: white;
+    font-size: larger;
+    text-align: center;
+    font-weight: bold;
+}
+
+.stat div+div {
+    /* border-top: dashed thin white; */
+}
+
+.stat div {
+    display: flex;
+    padding: 9px 0;
+    color: #637d97;
+    align-items: center;
+    margin-right: 30px;
+    margin-left: auto;
+}
+
+.stat div img {
+    width: 24px;
+    margin-left: 10px;
+}
+
+.stat div img.unsature {
+    filter: hue-rotate(200deg) saturate(0.2) brightness(1.3);
+}
+
+.stat div strong::after {
+    content: ':';
+}
+
+.stat div strong {
+    font-weight: 300;
+    margin-left: 10px;
+}
+
+.stat div p {
+    color: rgb(42, 42, 42);
 }

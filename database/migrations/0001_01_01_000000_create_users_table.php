@@ -18,14 +18,13 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('isAdmin')->default(false);
+            $table->boolean('isActive')->default(true);
             $table->string('phone')->unique()->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('father_name')->nullable();
             $table->string('national_code')->unique()->nullable();
-            $table->tinyInteger('classroom_id')->nullable();
-            $table->tinyInteger('level')->nullable();
-            $table->tinyInteger('field_id')->nullable();
+            $table->integer('classroom_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
