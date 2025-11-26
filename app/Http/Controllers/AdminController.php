@@ -132,7 +132,7 @@ class AdminController extends Controller
             "last_name" => ['required'],
             "father_name" => ['required'],
             "national_code" => ['required', Rule::unique('users')->ignore($id)],
-            "email" => ['required', 'email', Rule::unique('users')->ignore($id)],
+            "username" => ['required', 'username', Rule::unique('users')->ignore($id)],
             "phone" => ['required', Rule::unique('users')->ignore($id)],
             "password" => ['nullable', 'min:8'],
             "classroom_id" => ['required', 'exists:classrooms,id'],
@@ -146,7 +146,7 @@ class AdminController extends Controller
         $last_name = $request->get("last_name");
         $father_name = $request->get("father_name");
         $national_code = $request->get("national_code");
-        $email = $request->get("email");
+        $username = $request->get("username");
         $phone = $request->get("phone");
         $password = $request->get("password");
         $classroom_id = $request->get("classroom_id");
@@ -155,7 +155,7 @@ class AdminController extends Controller
         $student->last_name = $last_name;
         $student->father_name = $father_name;
         $student->national_code = $national_code;
-        $student->email = $email;
+        $student->username = $username;
         $student->phone = $phone;
         $student->classroom_id = $classroom_id;
         if (!empty($password)) {

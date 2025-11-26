@@ -19,12 +19,12 @@ class DatabaseSeeder extends Seeder
         $this->call(CourseSeeder::class);
         $this->call(ClassroomSeeder::class);
         $this->call(StudentsSeeder::class);
-        User::factory()->create([
+        User::create([
             'first_name' => 'کاربر',
             'last_name' => 'تست',
             'name' => 'کاربر تست',
             'isAdmin' => true,
-            'email' => 'test@admin.com',
+            'username' => 'admin',
             'password' => Hash::make("12345678")
         ]);
 

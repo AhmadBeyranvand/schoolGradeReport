@@ -36,11 +36,11 @@
                             <x-input-error class="mt-2" :messages="$errors->get('national_code')" />
                         </div>
                         <div class="my-8">
-                            <x-input-label for="email" :value="__('E-mail')" />
-                            <x-text-input style="direction:ltr" id="email" name="email" type="text"
-                                class="mt-1 block w-full" :value="old('email', $user->email)" required autofocus
+                            <x-input-label for="username" :value="__('username')" />
+                            <x-text-input style="direction:ltr" id="username" name="username" type="text"
+                                class="mt-1 block w-full" :value="old('username', $user->username)" required autofocus
                                 autocomplete="name" />
-                            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                            <x-input-error class="mt-2" :messages="$errors->get('username')" />
                         </div>
                         <div class="my-8">
                             <x-input-label for="phone" :value="__('Phone')" />
