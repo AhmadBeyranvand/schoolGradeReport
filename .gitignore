@@ -22,3 +22,5 @@ yarn-error.log
 /.vscode
 /.zed
 bun.lockb
+app.sql
+.gitignore
