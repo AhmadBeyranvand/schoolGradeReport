@@ -132,7 +132,7 @@ class AdminController extends Controller
             "last_name" => ['required'],
             "father_name" => ['required'],
             "national_code" => ['required', Rule::unique('users')->ignore($id)],
-            "username" => ['required', 'username', Rule::unique('users')->ignore($id)],
+            "username" => ['required', Rule::unique('users')->ignore($id)],
             "phone" => ['required', Rule::unique('users')->ignore($id)],
             "password" => ['nullable', 'min:8'],
             "classroom_id" => ['required', 'exists:classrooms,id'],
