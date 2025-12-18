@@ -20,20 +20,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ClassroomSeeder::class);
         $this->call(StudentsSeeder::class);
         User::create([
-            'first_name' => 'خانم',
-            'last_name' => 'خورزمان',
-            'name' => 'خانم خورزمان',
+            'first_name' => 'احمد',
+            'last_name' => 'بیرانوند',
+            'name' => 'احمد بیرانوند',
             'isAdmin' => true,
-            'username' => 'khorzaman910',
-            'password' => Hash::make("12345678")
-        ]);
-        User::create([
-            'first_name' => 'خانم',
-            'last_name' => 'گودرزی',
-            'name' => 'خانم گودرزی',
-            'isAdmin' => true,
-            'username' => 'goodarzi916',
-            'password' => Hash::make("12345678")
+            'username' => 'AhmadBeyranvand',
+            'password' => Hash::make("18816312")
         ]);
 
     }

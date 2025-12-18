@@ -15,19 +15,16 @@ class FieldsSeeder extends Seeder
     {
         Field::create([
             'id' => 1,
-            'title' => 'تجربی'
+            'title' => 'شبکه و نرم‌افزار رایانه'
         ]);
         Field::create([
             'id' => 2,
-            'title' => 'ریاضی'
+            'title' => 'تولیدکننده و توسعه دهنده پایگاه‌های اینترنتی'
         ]);
         Field::create([
             'id' => 3,
-            'title' => 'انسانی'
-        ]);
-        Field::create([
-            'id' => 4,
             'title' => 'عمومی'
         ]);
+
     }
 }
