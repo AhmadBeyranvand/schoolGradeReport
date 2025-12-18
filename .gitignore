@@ -24,3 +24,4 @@ yarn-error.log
 bun.lockb
 app.sql
 .gitignore
+app.tar.xz
